@@ -111,7 +111,7 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         jLabel24.setForeground(new java.awt.Color(19, 53, 112));
         jLabel24.setText("Last Name");
         jPanel9.add(jLabel24);
-        jLabel24.setBounds(10, 30, 60, 20);
+        jLabel24.setBounds(10, 30, 70, 20);
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(19, 53, 112));
@@ -127,7 +127,7 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         jLabel26.setForeground(new java.awt.Color(19, 53, 112));
         jLabel26.setText("Middle Name");
         jPanel9.add(jLabel26);
-        jLabel26.setBounds(10, 90, 60, 20);
+        jLabel26.setBounds(10, 90, 80, 20);
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(19, 53, 112));
@@ -139,7 +139,7 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         jLabel28.setForeground(new java.awt.Color(19, 53, 112));
         jLabel28.setText("Nationality");
         jPanel9.add(jLabel28);
-        jLabel28.setBounds(10, 150, 60, 20);
+        jLabel28.setBounds(10, 150, 80, 20);
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(19, 53, 112));
@@ -151,13 +151,13 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         jLabel30.setForeground(new java.awt.Color(19, 53, 112));
         jLabel30.setText("Date of Birth");
         jPanel9.add(jLabel30);
-        jLabel30.setBounds(10, 210, 60, 20);
+        jLabel30.setBounds(10, 210, 80, 20);
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(19, 53, 112));
         jLabel31.setText("Place of Birth");
         jPanel9.add(jLabel31);
-        jLabel31.setBounds(10, 240, 60, 20);
+        jLabel31.setBounds(10, 240, 90, 20);
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(19, 53, 112));
@@ -169,7 +169,7 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         jLabel33.setForeground(new java.awt.Color(19, 53, 112));
         jLabel33.setText("Occupation");
         jPanel9.add(jLabel33);
-        jLabel33.setBounds(10, 300, 60, 20);
+        jLabel33.setBounds(10, 300, 80, 20);
         jPanel9.add(jTextField24);
         jTextField24.setBounds(110, 290, 260, 30);
         jPanel9.add(jTextField25);
@@ -300,22 +300,6 @@ public class viewCustomer extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -330,38 +314,15 @@ public class viewCustomer extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField21;
     private javax.swing.JTextField jTextField22;
     private javax.swing.JTextField jTextField23;
@@ -371,13 +332,6 @@ public class viewCustomer extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField27;
     private javax.swing.JTextField jTextField28;
     private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField30;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }

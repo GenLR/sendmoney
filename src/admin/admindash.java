@@ -34,14 +34,15 @@ public class admindash extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        adminpages = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         users = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         transactions = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         reports = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        adminpages = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 500));
@@ -74,10 +75,127 @@ public class admindash extends javax.swing.JFrame {
         jPanel2.add(jLabel4);
         jLabel4.setBounds(730, 10, 59, 17);
 
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 830, 40);
+        users.setBackground(new java.awt.Color(60, 120, 240));
+        users.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                usersMouseClicked(evt);
+            }
+        });
 
-        adminpages.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 204, 51));
+        jLabel6.setText("Users");
+
+        javax.swing.GroupLayout usersLayout = new javax.swing.GroupLayout(users);
+        users.setLayout(usersLayout);
+        usersLayout.setHorizontalGroup(
+            usersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(usersLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        usersLayout.setVerticalGroup(
+            usersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(users);
+        users.setBounds(10, 40, 70, 30);
+
+        transactions.setBackground(new java.awt.Color(60, 120, 240));
+        transactions.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                transactionsMouseClicked(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 204, 51));
+        jLabel7.setText("Transactions");
+
+        javax.swing.GroupLayout transactionsLayout = new javax.swing.GroupLayout(transactions);
+        transactions.setLayout(transactionsLayout);
+        transactionsLayout.setHorizontalGroup(
+            transactionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(transactionsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        transactionsLayout.setVerticalGroup(
+            transactionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(transactions);
+        transactions.setBounds(96, 40, 140, 30);
+
+        reports.setBackground(new java.awt.Color(60, 120, 240));
+        reports.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reportsMouseClicked(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 204, 51));
+        jLabel8.setText("Reports");
+
+        javax.swing.GroupLayout reportsLayout = new javax.swing.GroupLayout(reports);
+        reports.setLayout(reportsLayout);
+        reportsLayout.setHorizontalGroup(
+            reportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(reportsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        reportsLayout.setVerticalGroup(
+            reportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(reports);
+        reports.setBounds(250, 40, 90, 30);
+
+        jPanel3.setPreferredSize(new java.awt.Dimension(5, 25));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(jPanel3);
+        jPanel3.setBounds(85, 40, 5, 30);
+
+        jPanel4.setPreferredSize(new java.awt.Dimension(5, 25));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(jPanel4);
+        jPanel4.setBounds(240, 40, 5, 30);
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(0, 0, 830, 80);
+
+        adminpages.setBackground(new java.awt.Color(204, 204, 204));
+        adminpages.setPreferredSize(new java.awt.Dimension(800, 459));
 
         javax.swing.GroupLayout adminpagesLayout = new javax.swing.GroupLayout(adminpages);
         adminpages.setLayout(adminpagesLayout);
@@ -87,96 +205,11 @@ public class admindash extends javax.swing.JFrame {
         );
         adminpagesLayout.setVerticalGroup(
             adminpagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 420, Short.MAX_VALUE)
         );
 
         jPanel1.add(adminpages);
-        adminpages.setBounds(0, 80, 800, 400);
-
-        jLabel3.setText("Date         |        Time");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(670, 480, 120, 20);
-
-        users.setBackground(new java.awt.Color(255, 255, 255));
-        users.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                usersMouseClicked(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setText("Users");
-
-        javax.swing.GroupLayout usersLayout = new javax.swing.GroupLayout(users);
-        users.setLayout(usersLayout);
-        usersLayout.setHorizontalGroup(
-            usersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(usersLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jLabel6)
-                .addContainerGap(73, Short.MAX_VALUE))
-        );
-        usersLayout.setVerticalGroup(
-            usersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(users);
-        users.setBounds(0, 40, 170, 30);
-
-        transactions.setBackground(new java.awt.Color(255, 255, 255));
-        transactions.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                transactionsMouseClicked(evt);
-            }
-        });
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setText("Transactions");
-
-        javax.swing.GroupLayout transactionsLayout = new javax.swing.GroupLayout(transactions);
-        transactions.setLayout(transactionsLayout);
-        transactionsLayout.setHorizontalGroup(
-            transactionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(transactionsLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jLabel7)
-                .addContainerGap(49, Short.MAX_VALUE))
-        );
-        transactionsLayout.setVerticalGroup(
-            transactionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(transactions);
-        transactions.setBounds(310, 40, 170, 30);
-
-        reports.setBackground(new java.awt.Color(255, 255, 255));
-        reports.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                reportsMouseClicked(evt);
-            }
-        });
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("Reports");
-
-        javax.swing.GroupLayout reportsLayout = new javax.swing.GroupLayout(reports);
-        reports.setLayout(reportsLayout);
-        reportsLayout.setHorizontalGroup(
-            reportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(reportsLayout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(jLabel8)
-                .addContainerGap(60, Short.MAX_VALUE))
-        );
-        reportsLayout.setVerticalGroup(
-            reportsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(reports);
-        reports.setBounds(620, 40, 170, 30);
+        adminpages.setBounds(0, 80, 800, 459);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -203,16 +236,16 @@ public class admindash extends javax.swing.JFrame {
         adminpages.add(trapa).setVisible(true);
     }//GEN-LAST:event_transactionsMouseClicked
 
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        usersPage uspa = new usersPage();
+        adminpages.add(uspa).setVisible(true);
+        
+    }//GEN-LAST:event_formWindowActivated
+
     private void reportsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsMouseClicked
         reportsPage repa = new reportsPage();
         adminpages.add(repa).setVisible(true);
     }//GEN-LAST:event_reportsMouseClicked
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        /*usersPage uspa = new usersPage();
-        adminpages.add(uspa).setVisible(true);
-        */
-    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -250,16 +283,17 @@ public class admindash extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel adminpages;
+    private javax.swing.JDesktopPane adminpages;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel reports;
     private javax.swing.JPanel transactions;
     private javax.swing.JPanel users;

@@ -85,7 +85,7 @@ public class receiveMoney extends javax.swing.JInternalFrame {
         jPanel2.setBackground(new java.awt.Color(40, 120, 240));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setForeground(new java.awt.Color(255, 204, 51));
         jLabel4.setText("Receiver Info");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

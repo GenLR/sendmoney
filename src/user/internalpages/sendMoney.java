@@ -5,6 +5,10 @@
  */
 package user.internalpages;
 
+import config.dbConnector;
+import java.security.NoSuchAlgorithmException;
+import java.util.Random;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -43,36 +47,38 @@ public class sendMoney extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        send_name = new javax.swing.JTextField();
+        purpose = new javax.swing.JTextField();
+        send_card = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        receive_name = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        receive_contact = new javax.swing.JTextField();
+        location = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        send_contact = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        retoreceiver = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
+        code = new javax.swing.JTextField();
+        amount = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        charge = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(800, 400));
+        setPreferredSize(new java.awt.Dimension(800, 459));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
@@ -81,7 +87,7 @@ public class sendMoney extends javax.swing.JInternalFrame {
         jLabel6.setForeground(new java.awt.Color(19, 53, 112));
         jLabel6.setText("Loyalty Card");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(20, 130, 80, 20);
+        jLabel6.setBounds(20, 190, 80, 20);
 
         jPanel2.setBackground(new java.awt.Color(40, 120, 240));
 
@@ -106,19 +112,19 @@ public class sendMoney extends javax.swing.JInternalFrame {
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(10, 20, 370, 20);
+        jPanel2.setBounds(10, 80, 370, 20);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(19, 53, 112));
         jLabel5.setText("Name");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(20, 50, 60, 20);
+        jLabel5.setBounds(20, 110, 60, 20);
 
         jPanel3.setBackground(new java.awt.Color(40, 120, 240));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Sender Info");
+        jLabel7.setText("Receiver Info");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -127,7 +133,7 @@ public class sendMoney extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
-                .addContainerGap(287, Short.MAX_VALUE))
+                .addContainerGap(279, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +143,7 @@ public class sendMoney extends javax.swing.JInternalFrame {
         );
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(10, 180, 370, 20);
+        jPanel3.setBounds(10, 240, 370, 20);
 
         jPanel4.setBackground(new java.awt.Color(40, 120, 240));
 
@@ -162,126 +168,131 @@ public class sendMoney extends javax.swing.JInternalFrame {
         );
 
         jPanel1.add(jPanel4);
-        jPanel4.setBounds(400, 20, 370, 20);
+        jPanel4.setBounds(420, 80, 370, 20);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(19, 53, 112));
         jLabel11.setText("to Receiver");
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(420, 60, 70, 20);
+        jLabel11.setBounds(440, 120, 70, 20);
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        send_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                send_nameActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2);
-        jTextField2.setBounds(120, 50, 250, 30);
-        jPanel1.add(jTextField3);
-        jTextField3.setBounds(510, 90, 250, 30);
-        jPanel1.add(jTextField4);
-        jTextField4.setBounds(120, 130, 250, 30);
+        jPanel1.add(send_name);
+        send_name.setBounds(120, 110, 250, 30);
+        jPanel1.add(purpose);
+        purpose.setBounds(530, 150, 250, 30);
+        jPanel1.add(send_card);
+        send_card.setBounds(120, 190, 250, 30);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(19, 53, 112));
         jLabel13.setText("Contact No.");
         jPanel1.add(jLabel13);
-        jLabel13.setBounds(20, 90, 80, 20);
+        jLabel13.setBounds(20, 150, 80, 20);
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        receive_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                receive_nameActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField5);
-        jTextField5.setBounds(120, 210, 250, 30);
+        jPanel1.add(receive_name);
+        receive_name.setBounds(120, 270, 250, 30);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(19, 53, 112));
         jLabel8.setText("Name");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(20, 210, 60, 20);
+        jLabel8.setBounds(20, 270, 60, 20);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(19, 53, 112));
         jLabel14.setText("Contact No.");
         jPanel1.add(jLabel14);
-        jLabel14.setBounds(20, 250, 80, 20);
-        jPanel1.add(jTextField6);
-        jTextField6.setBounds(120, 250, 250, 30);
+        jLabel14.setBounds(20, 310, 80, 20);
+        jPanel1.add(receive_contact);
+        receive_contact.setBounds(120, 310, 250, 30);
 
-        jTextField7.setText("Anywhere in the Philippines");
-        jPanel1.add(jTextField7);
-        jTextField7.setBounds(120, 290, 250, 30);
+        location.setText("Anywhere in the Philippines");
+        jPanel1.add(location);
+        location.setBounds(120, 350, 250, 30);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(19, 53, 112));
         jLabel9.setText("Location");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(20, 300, 70, 20);
-        jPanel1.add(jTextField8);
-        jTextField8.setBounds(120, 90, 250, 30);
+        jLabel9.setBounds(20, 360, 70, 20);
+        jPanel1.add(send_contact);
+        send_contact.setBounds(120, 150, 250, 30);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(19, 53, 112));
         jLabel15.setText("Relationship");
         jPanel1.add(jLabel15);
-        jLabel15.setBounds(410, 50, 80, 20);
+        jLabel15.setBounds(430, 110, 80, 20);
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(19, 53, 112));
         jLabel16.setText("Branch");
         jPanel1.add(jLabel16);
-        jLabel16.setBounds(20, 290, 60, 20);
+        jLabel16.setBounds(20, 350, 60, 20);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(19, 53, 112));
         jLabel17.setText("Purpose of");
         jPanel1.add(jLabel17);
-        jLabel17.setBounds(410, 90, 80, 20);
+        jLabel17.setBounds(430, 150, 80, 20);
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(19, 53, 112));
         jLabel18.setText("Transaction");
         jPanel1.add(jLabel18);
-        jLabel18.setBounds(420, 100, 80, 20);
-        jPanel1.add(jTextField9);
-        jTextField9.setBounds(510, 50, 250, 30);
+        jLabel18.setBounds(440, 160, 80, 20);
+        jPanel1.add(retoreceiver);
+        retoreceiver.setBounds(530, 110, 250, 30);
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(19, 53, 112));
-        jLabel19.setText("Cash");
+        jLabel19.setText("Amount");
         jPanel1.add(jLabel19);
-        jLabel19.setBounds(410, 130, 80, 20);
-        jPanel1.add(jTextField10);
-        jTextField10.setBounds(510, 210, 170, 30);
-        jPanel1.add(jTextField11);
-        jTextField11.setBounds(510, 130, 250, 30);
+        jLabel19.setBounds(430, 190, 80, 20);
+        jPanel1.add(code);
+        code.setBounds(120, 20, 170, 30);
+        jPanel1.add(amount);
+        amount.setBounds(530, 190, 250, 30);
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(19, 53, 112));
         jLabel20.setText("Fee");
         jPanel1.add(jLabel20);
-        jLabel20.setBounds(410, 170, 80, 20);
+        jLabel20.setBounds(430, 230, 80, 20);
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(19, 53, 112));
         jLabel21.setText("Transaction");
         jPanel1.add(jLabel21);
-        jLabel21.setBounds(410, 210, 80, 20);
+        jLabel21.setBounds(20, 20, 80, 20);
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(19, 53, 112));
         jLabel22.setText("Code");
         jPanel1.add(jLabel22);
-        jLabel22.setBounds(420, 220, 80, 20);
-        jPanel1.add(jTextField12);
-        jTextField12.setBounds(510, 170, 250, 30);
+        jLabel22.setBounds(30, 30, 80, 20);
+        jPanel1.add(charge);
+        charge.setBounds(530, 230, 170, 30);
 
         jPanel5.setBackground(new java.awt.Color(20, 120, 240));
+        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel5MouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(255, 204, 51));
         jLabel3.setText("Generate Reciept");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -299,25 +310,43 @@ public class sendMoney extends javax.swing.JInternalFrame {
         );
 
         jPanel1.add(jPanel5);
-        jPanel5.setBounds(570, 290, 130, 31);
+        jPanel5.setBounds(570, 310, 130, 31);
 
         jPanel6.setBackground(new java.awt.Color(20, 120, 240));
         jPanel6.setLayout(null);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Generate");
+        jLabel12.setForeground(new java.awt.Color(255, 204, 51));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("View Rates");
         jPanel6.add(jLabel12);
-        jLabel12.setBounds(10, 0, 46, 20);
-
-        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel23.setText("Code");
-        jPanel6.add(jLabel23);
-        jLabel23.setBounds(20, 10, 30, 20);
+        jLabel12.setBounds(10, 0, 56, 30);
 
         jPanel1.add(jPanel6);
-        jPanel6.setBounds(690, 210, 70, 30);
+        jPanel6.setBounds(710, 230, 70, 30);
+
+        jPanel7.setBackground(new java.awt.Color(20, 120, 240));
+        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel7MouseClicked(evt);
+            }
+        });
+        jPanel7.setLayout(null);
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 204, 51));
+        jLabel24.setText("Generate");
+        jPanel7.add(jLabel24);
+        jLabel24.setBounds(10, 0, 46, 20);
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 204, 51));
+        jLabel25.setText("Code");
+        jPanel7.add(jLabel25);
+        jLabel25.setBounds(20, 10, 30, 20);
+
+        jPanel1.add(jPanel7);
+        jPanel7.setBounds(300, 20, 70, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -333,16 +362,56 @@ public class sendMoney extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void send_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_send_nameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_send_nameActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void receive_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_receive_nameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_receive_nameActionPerformed
+
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+        
+        String letters = "abcdefghijklmnopqrstuvwxyz";
+        char[] alphanumeric = (letters + letters.toUpperCase() + "0123456789").toCharArray();
+        
+        StringBuilder result = new StringBuilder();
+        
+        for(int i = 0; i < 10; i++){
+            result.append(alphanumeric[new Random().nextInt(alphanumeric.length)]);
+        }
+        code.setText(result.toString());
+        
+    }//GEN-LAST:event_jPanel7MouseClicked
+
+    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+        
+        dbConnector dbc = new dbConnector();
+        
+        if(true){
+        
+            dbc.insertData("INSERT INTO tbl_sender (se_name, se_contact, se_card)\n" +
+                "VALUES('"+send_name.getText()+"','"+send_contact.getText()+"', '"+send_card.getText()+"')");
+            
+            dbc.insertData("INSERT INTO tbl_receiver (re_name, re_contact, re_card)\n" +
+                "VALUES('"+receive_name.getText()+"', '"+receive_contact.getText()+"', 'none') ");
+            
+            dbc.insertData("INSERT INTO tbl_transactions (tr_sender, tr_receiver, tr_location, tr_amount, tr_charge, tr_code, re_datesent, re_datereceived)\n" +
+                "VALUES (tbl_sender.se_id, tbl_receiver.re_id, '"+location.getText()+"', \n" +
+                " '"+amount.getText()+"', '"+charge.getText()+"', \n" +
+                " '"+code.getText()+"', '2002-08-22', '2002-08-06' )");
+            
+            JOptionPane.showMessageDialog(null, "Insert Successfully");
+        }else{
+            JOptionPane.showMessageDialog(null, "Connection Error");
+        }
+    }//GEN-LAST:event_jPanel5MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField amount;
+    private javax.swing.JTextField charge;
+    private javax.swing.JTextField code;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -356,7 +425,8 @@ public class sendMoney extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -370,16 +440,14 @@ public class sendMoney extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JTextField location;
+    private javax.swing.JTextField purpose;
+    private javax.swing.JTextField receive_contact;
+    private javax.swing.JTextField receive_name;
+    private javax.swing.JTextField retoreceiver;
+    private javax.swing.JTextField send_card;
+    private javax.swing.JTextField send_contact;
+    private javax.swing.JTextField send_name;
     // End of variables declaration//GEN-END:variables
 }
