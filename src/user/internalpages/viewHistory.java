@@ -34,7 +34,7 @@ public class viewHistory extends javax.swing.JInternalFrame {
         if(search.getText().isEmpty()){
             try{
                 dbConnector dbc = new dbConnector();
-                ResultSet rs = dbc.getData("SELECT tr_id, tbl_sender.se_name, tbl_sender.se_contact, tbl_sender.se_cardno, tbl_receiver.re_name, tbl_receiver.re_contact, tbl_receiver.re_card, tr_location, tr_amount, tr_charge, tr_code, tr_datesent, tr_datereceived  \n" +
+                ResultSet rs = dbc.getData("SELECT tr_id, tbl_sender.se_name, tbl_sender.se_contact, tbl_sender.se_card, tbl_receiver.re_name, tbl_receiver.re_contact, tbl_receiver.re_card, tr_location, tr_amount, tr_charge, tr_code, tr_datesent, tr_datereceived  \n" +
                         "FROM `tbl_transactions`\n" +
                         "\n" +
                         "INNER JOIN tbl_sender \n" +
@@ -50,7 +50,7 @@ public class viewHistory extends javax.swing.JInternalFrame {
         }else{
             try{
                 dbConnector dbc = new dbConnector();
-                ResultSet rs = dbc.getData("SELECT * FROM tbl_user WHERE tr_senderinfo = '"+search.getText()+"' OR "
+                ResultSet rs = dbc.getData("SELECT * FROM tbl_transactions WHERE tr_senderinfo = '"+search.getText()+"' OR "
                         + "tr_receiverinfo = '"+search.getText()+"' OR tr_location = '"+search.getText()+"' OR "
                         + "tr_amount = '"+search.getText()+"' OR tr_charge = '"+search.getText()+"' "
                         + "OR tr_code = '"+search.getText()+"' OR tr_datesent = '"+search.getText()+"' "

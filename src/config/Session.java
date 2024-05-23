@@ -5,11 +5,8 @@ package config;
 public class Session {
     
     private static Session instance;
-    private int id;
     private String eid;
-    private String lname;
-    private String fname;
-    private String mname;
+    private String name;
     private String username;
     private String password;
     private String acctype;
@@ -30,14 +27,6 @@ public class Session {
     public static boolean isInstanceEmpty() {
         return instance == null;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
     
     public String getEid() {
         return eid;
@@ -46,29 +35,13 @@ public class Session {
     public void setEid(String eid) {
         this.eid = eid;
     }
-    
-    public String getLname() {
-        return lname;
+
+    public String getName() {
+        return name;
     }
 
-    public void setLname(String lname) {
-        this.lname = lname;
-    }
-
-    public String getFname() {
-        return fname;
-    }
-
-    public void setFname(String fname) {
-        this.fname = fname;
-    }
-
-    public String getMname() {
-        return mname;
-    }
-
-    public void setMname(String mname) {
-        this.mname = mname;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUsername() {

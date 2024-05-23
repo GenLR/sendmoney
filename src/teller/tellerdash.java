@@ -11,12 +11,12 @@ import user.internalpages.*;
  *
  * @author Larosa Family
  */
-public class userdash extends javax.swing.JFrame {
+public class tellerdash extends javax.swing.JFrame {
 
     /**
      * Creates new form userdash
      */
-    public userdash() {
+    public tellerdash() {
         initComponents();
     }
 
@@ -104,7 +104,7 @@ public class userdash extends javax.swing.JFrame {
         );
 
         jPanel2.add(send);
-        send.setBounds(10, 40, 130, 30);
+        send.setBounds(10, 30, 130, 30);
 
         receive.setBackground(new java.awt.Color(60, 120, 240));
         receive.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -132,7 +132,7 @@ public class userdash extends javax.swing.JFrame {
         );
 
         jPanel2.add(receive);
-        receive.setBounds(160, 40, 156, 30);
+        receive.setBounds(160, 30, 156, 30);
 
         history.setBackground(new java.awt.Color(60, 120, 240));
         history.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -161,7 +161,7 @@ public class userdash extends javax.swing.JFrame {
         );
 
         jPanel2.add(history);
-        history.setBounds(330, 40, 136, 30);
+        history.setBounds(330, 30, 136, 30);
 
         customer.setBackground(new java.awt.Color(60, 120, 240));
         customer.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -189,7 +189,7 @@ public class userdash extends javax.swing.JFrame {
         );
 
         jPanel2.add(customer);
-        customer.setBounds(480, 40, 160, 30);
+        customer.setBounds(480, 30, 160, 30);
 
         jPanel3.setPreferredSize(new java.awt.Dimension(5, 25));
 
@@ -315,20 +315,21 @@ public class userdash extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(userdash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tellerdash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(userdash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tellerdash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(userdash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tellerdash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(userdash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tellerdash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new userdash().setVisible(true);
+                new tellerdash().setVisible(true);
             }
         });
     }

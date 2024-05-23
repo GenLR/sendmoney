@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import teller.userdash;
+import teller.tellerdash;
 
 public class logindash extends javax.swing.JFrame {
 
@@ -20,23 +20,27 @@ public class logindash extends javax.swing.JFrame {
         dbConnector connector = new dbConnector();
         
         try{
-            String query = "SELECT * FROM tbl_user Where username = '"+username+"' AND employeeid = '"+empid+"' ";
+            String query = "SELECT * FROM tbl_user WHERE username = '"+username+"' AND employeeid = '"+empid+"' ";
             ResultSet rs = connector.getData(query);
-            
+
             if(rs.next()){
                 String hashedPass = rs.getString("password");
                 
+                System.out.println(""+rs.getString("employeeid"));
+                System.out.println(""+rs.getString("username"));
+                System.out.println(""+rs.getString("password"));
+                System.out.println(""+passHash.hashPassword(password));
+                
                 if(passHash.hashPassword(password).equals(hashedPass)){
+                    System.out.println("HERE");
                     Session ses =  Session.getInstance();
                         ses.setEid("employeeid");
-                        ses.setId(rs.getInt("userid"));
-                        ses.setLname(rs.getString("lastname"));
-                        ses.setFname(rs.getString("firstname"));
-                        ses.setMname(rs.getString("middlename"));
+                        ses.setName(rs.getString("fullname"));
                         ses.setUsername(rs.getString("username"));
                         ses.setPassword(rs.getString("password"));
                         ses.setAcctype(rs.getString("acctype"));
                         ses.setStatus(rs.getString("status"));
+                        System.out.println("THERE");
 
                     return true;
                 }else{
@@ -267,7 +271,7 @@ public class logindash extends javax.swing.JFrame {
                     this.dispose();
                 }else{
                     JOptionPane.showMessageDialog(null, "Login Success");
-                    userdash udash = new userdash();
+                    tellerdash udash = new tellerdash();
                     udash.setVisible(true);
                     this.dispose();
                 }
