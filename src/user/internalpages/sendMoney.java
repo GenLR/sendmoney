@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package user.internalpages;
 
 import config.dbConnector;
@@ -12,15 +8,9 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
-/**
- *
- * @author Larosa Family
- */
+
 public class sendMoney extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form createTransaction
-     */
     public sendMoney() {
         initComponents();
         
@@ -45,6 +35,29 @@ public class sendMoney extends javax.swing.JInternalFrame {
                 System.out.println("Errors: "+ex.getMessage());
                 return false;
             } 
+        
+    }
+    
+    public static String getCode() {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        
+        for(int i = 0; i < 3; i++) {
+            char randomChar = (char)(random.nextInt(26) + 'A'); 
+            sb.append(randomChar);
+        }
+        
+        sb.append("-");
+        for(int i = 0; i < 3; i++) {
+            sb.append(random.nextInt(10));
+        }
+        
+        sb.append("-");
+        for(int i = 0; i < 3; i++) {
+            sb.append(random.nextInt(10));
+        }
+
+        return sb.toString();
         
     }
     
@@ -91,7 +104,7 @@ public class sendMoney extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        generateCode = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
 
@@ -367,28 +380,28 @@ public class sendMoney extends javax.swing.JInternalFrame {
         jPanel1.add(jPanel6);
         jPanel6.setBounds(710, 230, 70, 30);
 
-        jPanel7.setBackground(new java.awt.Color(20, 120, 240));
-        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        generateCode.setBackground(new java.awt.Color(20, 120, 240));
+        generateCode.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel7MouseClicked(evt);
+                generateCodeMouseClicked(evt);
             }
         });
-        jPanel7.setLayout(null);
+        generateCode.setLayout(null);
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 204, 51));
         jLabel24.setText("Generate");
-        jPanel7.add(jLabel24);
+        generateCode.add(jLabel24);
         jLabel24.setBounds(10, 0, 46, 20);
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 204, 51));
         jLabel25.setText("Code");
-        jPanel7.add(jLabel25);
+        generateCode.add(jLabel25);
         jLabel25.setBounds(20, 10, 30, 20);
 
-        jPanel1.add(jPanel7);
-        jPanel7.setBounds(300, 20, 70, 30);
+        jPanel1.add(generateCode);
+        generateCode.setBounds(300, 20, 70, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -412,19 +425,11 @@ public class sendMoney extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_receive_nameActionPerformed
 
-    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+    private void generateCodeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generateCodeMouseClicked
+
+        code.setText(getCode());
         
-        String letters = "abcdefghijklmnopqrstuvwxyz";
-        char[] alphanumeric = (letters + letters.toUpperCase() + "0123456789").toCharArray();
-        
-        StringBuilder result = new StringBuilder();
-        
-        for(int i = 0; i < 10; i++){
-            result.append(alphanumeric[new Random().nextInt(alphanumeric.length)]);
-        }
-        code.setText(result.toString());
-        
-    }//GEN-LAST:event_jPanel7MouseClicked
+    }//GEN-LAST:event_generateCodeMouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
         
@@ -498,6 +503,7 @@ public class sendMoney extends javax.swing.JInternalFrame {
     private javax.swing.JTextField amount;
     private javax.swing.JTextField charge;
     private javax.swing.JTextField code;
+    private javax.swing.JPanel generateCode;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -526,7 +532,6 @@ public class sendMoney extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JTextField location;
     private javax.swing.JTextField purpose;
     private javax.swing.JLabel re_cus;

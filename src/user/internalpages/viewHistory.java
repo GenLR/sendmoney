@@ -47,19 +47,6 @@ public class viewHistory extends javax.swing.JInternalFrame {
             }catch(SQLException ex){
                 System.out.println("Errors: "+ex.getMessage());
             } 
-        }else{
-            try{
-                dbConnector dbc = new dbConnector();
-                ResultSet rs = dbc.getData("SELECT * FROM tbl_transactions WHERE tr_senderinfo = '"+search.getText()+"' OR "
-                        + "tr_receiverinfo = '"+search.getText()+"' OR tr_location = '"+search.getText()+"' OR "
-                        + "tr_amount = '"+search.getText()+"' OR tr_charge = '"+search.getText()+"' "
-                        + "OR tr_code = '"+search.getText()+"' OR tr_datesent = '"+search.getText()+"' "
-                        + "OR tr_datereceived = '"+search.getText()+"'");
-                transaction_table.setModel(DbUtils.resultSetToTableModel(rs));
-                rs.close();
-            }catch(SQLException ex){
-                System.out.println("Errors: "+ex.getMessage());
-            } 
         }
     }
     @SuppressWarnings("unchecked")
@@ -167,7 +154,7 @@ public class viewHistory extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_searchActionPerformed
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
-        displayData();
+        
     }//GEN-LAST:event_jPanel3MouseClicked
 
 

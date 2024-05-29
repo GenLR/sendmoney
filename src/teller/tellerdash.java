@@ -5,6 +5,9 @@
  */
 package teller;
 
+import java.awt.Color;
+import javax.swing.JOptionPane;
+import login.logindash;
 import user.internalpages.*;
 
 public class tellerdash extends javax.swing.JFrame {
@@ -14,28 +17,33 @@ public class tellerdash extends javax.swing.JFrame {
         initComponents();
         
     }
-
+    
+    Color myYellow = new Color(255,204,51);
+    Color myWhite = new Color(240,240,240);
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        confirmOut = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        send = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        receive = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        history = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        customer = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        send = new javax.swing.JLabel();
+        receive = new javax.swing.JLabel();
+        transaction = new javax.swing.JLabel();
+        customer = new javax.swing.JLabel();
+        logout = new javax.swing.JLabel();
         tellerpages = new javax.swing.JDesktopPane();
+
+        confirmOut.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        confirmOut.setText("Confirm Logout");
+        jPopupMenu1.add(confirmOut);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -62,125 +70,6 @@ public class tellerdash extends javax.swing.JFrame {
         jLabel2.setText("Name");
         jPanel2.add(jLabel2);
         jLabel2.setBounds(110, 10, 99, 17);
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("LOGOUT");
-        jPanel2.add(jLabel4);
-        jLabel4.setBounds(730, 10, 59, 17);
-
-        send.setBackground(new java.awt.Color(60, 120, 240));
-        send.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sendMouseClicked(evt);
-            }
-        });
-
-        jLabel9.setBackground(new java.awt.Color(60, 120, 240));
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 204, 51));
-        jLabel9.setText("Send Money");
-
-        javax.swing.GroupLayout sendLayout = new javax.swing.GroupLayout(send);
-        send.setLayout(sendLayout);
-        sendLayout.setHorizontalGroup(
-            sendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sendLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        sendLayout.setVerticalGroup(
-            sendLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(send);
-        send.setBounds(10, 40, 130, 30);
-
-        receive.setBackground(new java.awt.Color(60, 120, 240));
-        receive.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                receiveMouseClicked(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 204, 51));
-        jLabel6.setText("Receive Money");
-
-        javax.swing.GroupLayout receiveLayout = new javax.swing.GroupLayout(receive);
-        receive.setLayout(receiveLayout);
-        receiveLayout.setHorizontalGroup(
-            receiveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(receiveLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        receiveLayout.setVerticalGroup(
-            receiveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(receive);
-        receive.setBounds(160, 40, 156, 30);
-
-        history.setBackground(new java.awt.Color(60, 120, 240));
-        history.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                historyMouseClicked(evt);
-            }
-        });
-
-        jLabel8.setBackground(new java.awt.Color(60, 120, 240));
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 204, 51));
-        jLabel8.setText("Transactions");
-
-        javax.swing.GroupLayout historyLayout = new javax.swing.GroupLayout(history);
-        history.setLayout(historyLayout);
-        historyLayout.setHorizontalGroup(
-            historyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(historyLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        historyLayout.setVerticalGroup(
-            historyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(history);
-        history.setBounds(330, 40, 136, 30);
-
-        customer.setBackground(new java.awt.Color(60, 120, 240));
-        customer.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                customerMouseClicked(evt);
-            }
-        });
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 204, 51));
-        jLabel7.setText("View Customer");
-
-        javax.swing.GroupLayout customerLayout = new javax.swing.GroupLayout(customer);
-        customer.setLayout(customerLayout);
-        customerLayout.setHorizontalGroup(
-            customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        customerLayout.setVerticalGroup(
-            customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(customer);
-        customer.setBounds(480, 40, 160, 30);
 
         jPanel3.setPreferredSize(new java.awt.Dimension(5, 25));
 
@@ -212,7 +101,7 @@ public class tellerdash extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel4);
-        jPanel4.setBounds(320, 40, 5, 30);
+        jPanel4.setBounds(310, 40, 5, 30);
 
         jPanel5.setPreferredSize(new java.awt.Dimension(5, 25));
 
@@ -228,7 +117,92 @@ public class tellerdash extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel5);
-        jPanel5.setBounds(470, 40, 5, 30);
+        jPanel5.setBounds(455, 40, 5, 30);
+
+        send.setBackground(new java.awt.Color(60, 120, 240));
+        send.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        send.setForeground(new java.awt.Color(255, 204, 51));
+        send.setText("Send Money");
+        send.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        send.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sendMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                sendMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                sendMouseExited(evt);
+            }
+        });
+        jPanel2.add(send);
+        send.setBounds(20, 40, 110, 30);
+
+        receive.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        receive.setForeground(new java.awt.Color(255, 204, 51));
+        receive.setText("Receive Money");
+        receive.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        receive.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                receiveMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                receiveMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                receiveMouseExited(evt);
+            }
+        });
+        jPanel2.add(receive);
+        receive.setBounds(160, 40, 136, 30);
+
+        transaction.setBackground(new java.awt.Color(60, 120, 240));
+        transaction.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        transaction.setForeground(new java.awt.Color(255, 204, 51));
+        transaction.setText("Transactions");
+        transaction.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        transaction.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                transactionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                transactionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                transactionMouseExited(evt);
+            }
+        });
+        jPanel2.add(transaction);
+        transaction.setBounds(326, 40, 120, 30);
+
+        customer.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        customer.setForeground(new java.awt.Color(255, 204, 51));
+        customer.setText("View Customer");
+        customer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        customer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customerMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                customerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                customerMouseExited(evt);
+            }
+        });
+        jPanel2.add(customer);
+        customer.setBounds(470, 40, 136, 30);
+
+        logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout.png"))); // NOI18N
+        logout.setComponentPopupMenu(jPopupMenu1);
+        logout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        logout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutMouseClicked(evt);
+            }
+        });
+        jPanel2.add(logout);
+        logout.setBounds(770, 0, 24, 40);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 800, 80);
@@ -263,31 +237,75 @@ public class tellerdash extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(816, 539));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void receiveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receiveMouseClicked
-        receiveMoney remo = new receiveMoney();
-        tellerpages.add(remo).setVisible(true);
-    }//GEN-LAST:event_receiveMouseClicked
         
-    private void customerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerMouseClicked
-        viewCustomer vicu = new viewCustomer();
-        tellerpages.add(vicu).setVisible(true);
-    }//GEN-LAST:event_customerMouseClicked
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+    //    viewHistory his = new viewHistory();
+    //    tellerpages.add(his).setVisible(true);
+    }//GEN-LAST:event_formWindowActivated
 
-    private void historyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_historyMouseClicked
-        viewHistory his = new viewHistory();
-        tellerpages.add(his).setVisible(true);
-    }//GEN-LAST:event_historyMouseClicked
+    private void sendMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sendMouseEntered
+        send.setForeground(myWhite);
+    }//GEN-LAST:event_sendMouseEntered
+
+    private void sendMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sendMouseExited
+        send.setForeground(myYellow);
+    }//GEN-LAST:event_sendMouseExited
+
+    private void customerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerMouseEntered
+        customer.setForeground(myWhite);
+    }//GEN-LAST:event_customerMouseEntered
+
+    private void customerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerMouseExited
+        customer.setForeground(myYellow);
+    }//GEN-LAST:event_customerMouseExited
 
     private void sendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sendMouseClicked
         sendMoney semo = new sendMoney();
         tellerpages.add(semo).setVisible(true);
     }//GEN-LAST:event_sendMouseClicked
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-    //    viewHistory his = new viewHistory();
-    //    tellerpages.add(his).setVisible(true);
-    }//GEN-LAST:event_formWindowActivated
+    private void receiveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receiveMouseClicked
+        receiveMoney remo = new receiveMoney();
+        tellerpages.add(remo).setVisible(true);
+    }//GEN-LAST:event_receiveMouseClicked
+
+    private void receiveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receiveMouseEntered
+        receive.setForeground(myWhite);
+    }//GEN-LAST:event_receiveMouseEntered
+
+    private void receiveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receiveMouseExited
+        receive.setForeground(myYellow);
+    }//GEN-LAST:event_receiveMouseExited
+
+    private void transactionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionMouseClicked
+        viewHistory his = new viewHistory();
+        tellerpages.add(his).setVisible(true);
+    }//GEN-LAST:event_transactionMouseClicked
+
+    private void transactionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionMouseEntered
+        transaction.setForeground(myWhite);
+    }//GEN-LAST:event_transactionMouseEntered
+
+    private void transactionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionMouseExited
+        transaction.setForeground(myYellow);
+    }//GEN-LAST:event_transactionMouseExited
+
+    private void customerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerMouseClicked
+        viewCustomer vicu = new viewCustomer();
+        tellerpages.add(vicu).setVisible(true);
+    }//GEN-LAST:event_customerMouseClicked
+
+    private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
+        int res = JOptionPane.showConfirmDialog(null, "Confirm Logout?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+        if(res == JOptionPane.YES_OPTION) {
+            logindash loda = new logindash();
+            loda.setVisible(true);
+            this.dispose();
+        }else if(res == JOptionPane.NO_OPTION) {
+            System.out.println("User clicked No"); 
+        }
+    }//GEN-LAST:event_logoutMouseClicked
 
     /**
      * @param args the command line arguments
@@ -326,22 +344,20 @@ public class tellerdash extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel customer;
-    private javax.swing.JPanel history;
+    private javax.swing.JMenuItem confirmOut;
+    private javax.swing.JLabel customer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel receive;
-    private javax.swing.JPanel send;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JLabel logout;
+    private javax.swing.JLabel receive;
+    private javax.swing.JLabel send;
     private javax.swing.JDesktopPane tellerpages;
+    private javax.swing.JLabel transaction;
     // End of variables declaration//GEN-END:variables
 }

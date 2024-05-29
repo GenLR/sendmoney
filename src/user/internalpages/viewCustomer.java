@@ -6,11 +6,9 @@
 package user.internalpages;
 
 import config.dbConnector;
-import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -31,28 +29,76 @@ public class viewCustomer extends javax.swing.JInternalFrame {
     }
     
     public void displayData(){
-        
-        if(search.getText().isEmpty()){
-            try{
-                dbConnector dbc = new dbConnector();
-                ResultSet rs = dbc.getData("SELECT cu_lname AS 'Last Name', cu_fname AS 'First Name', cu_mname AS 'Middle Name', "
-                        + " cu_contact AS 'CONTACT NO.', cu_address AS 'ADDRESS' FROM tbl_customer");
-                customer_table.setModel(DbUtils.resultSetToTableModel(rs));
-                rs.close();
-            }catch(SQLException ex){
-                System.out.println("Errors: "+ex.getMessage());
-            } 
-        }
+        try{
+            dbConnector dbc = new dbConnector();
+            ResultSet rs = dbc.getData("SELECT "
+                    + " cu_id AS 'ID', "
+                    + " cu_lname AS 'Last Name', "
+                    + " cu_fname AS 'First Name', "
+                    + " cu_mname AS 'Middle Name', "
+                    + " co_number AS 'Contac mo.', "
+                    + " cu_gender AS 'Gender', "
+                    + " cu_nationality AS 'Nationality', "
+                    + " cu_address AS 'Address', "
+                    + " cu_birthdate AS 'Date of Birth', "
+                    + " cu_birthplace AS 'Place of Birth', "
+                    + " cu_marital AS 'Marital Status', "
+                    + " cu_occupation AS 'Occupation' "
+                    + " FROM tbl_customer "
+                    + " JOIN tbl_contact ON tbl_customer.cu_id = tbl_contact.co_id");
+            customer_table.setModel(DbUtils.resultSetToTableModel(rs));
+            rs.close();
+        }catch(SQLException ex){
+            System.out.println("Errors: "+ex.getMessage());
+        } 
+
     }
     
     public void searchTable(){
         DefaultTableModel model = (DefaultTableModel)customer_table.getModel();
-        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
         customer_table.setRowSorter(tr);
         tr.setRowFilter(RowFilter.regexFilter(search.getText().trim()));     
     }
     
+    public static int checkContact(String coNum){
+        int conID;
+        dbConnector dbc = new dbConnector();
+        try{
+            
+            String query = "SELECT * FROM tbl_contact WHERE co_number = '"+coNum+"' ";
+            ResultSet rs = dbc.getData(query);
+            
+            if(rs.next()){
+                conID = rs.getInt("co_id");
+                rs.close();
+            }else{
+                dbc.insertData("INSERT INTO tbl_contact (co_number) VALUES ('"+coNum+"') ");
+                conID = checkContact(coNum);
+                rs.close();    
+            }
+            
+        }catch(SQLException ex){
+            System.out.println("Errors: "+ex.getMessage());
+            return 0;
+        }
+        return conID;
+    }
     
+    public void clearFields(){
+        cu_id.setText("");
+        cu_lname.setText("");
+        cu_fname.setText("");
+        cu_mname.setText("");
+        cu_contact.setText("");
+        genderGroup.clearSelection();
+        cu_nationality.setText("");
+        cu_address.setText("");
+        cu_birthdate.setDate(null);
+        cu_birthplace.setText("");
+        cu_marital.setSelectedItem("Single");
+        cu_occupation.setText("");
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -82,8 +128,6 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         cu_fname = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
-        jLabel36 = new javax.swing.JLabel();
         cu_occupation = new javax.swing.JTextField();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
@@ -94,6 +138,8 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         female = new javax.swing.JRadioButton();
         cu_birthdate = new com.toedter.calendar.JDateChooser();
         cu_marital = new javax.swing.JComboBox<>();
+        clear = new javax.swing.JButton();
+        refresh = new javax.swing.JButton();
         search = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
 
@@ -189,30 +235,7 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         jPanel10.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 31));
 
         jPanel9.add(jPanel10);
-        jPanel10.setBounds(600, 190, 80, 31);
-
-        jPanel11.setBackground(new java.awt.Color(20, 120, 240));
-
-        jLabel36.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel36.setText("REFRESH");
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel36)
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-        );
-
-        jPanel9.add(jPanel11);
-        jPanel11.setBounds(690, 190, 80, 31);
+        jPanel10.setBounds(480, 190, 90, 31);
         jPanel9.add(cu_occupation);
         cu_occupation.setBounds(510, 150, 260, 30);
 
@@ -250,7 +273,7 @@ public class viewCustomer extends javax.swing.JInternalFrame {
             }
         });
         jPanel9.add(add);
-        add.setBounds(500, 190, 90, 30);
+        add.setBounds(380, 190, 90, 30);
 
         male.setBackground(new java.awt.Color(255, 255, 255));
         genderGroup.add(male);
@@ -272,6 +295,30 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         cu_marital.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single", "Married", "Separated", "Widowed" }));
         jPanel9.add(cu_marital);
         cu_marital.setBounds(510, 120, 260, 30);
+
+        clear.setBackground(new java.awt.Color(20, 120, 240));
+        clear.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        clear.setForeground(new java.awt.Color(255, 255, 255));
+        clear.setText("CLEAR");
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
+            }
+        });
+        jPanel9.add(clear);
+        clear.setBounds(680, 190, 90, 30);
+
+        refresh.setBackground(new java.awt.Color(20, 120, 240));
+        refresh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        refresh.setForeground(new java.awt.Color(255, 255, 255));
+        refresh.setText("REFRESH");
+        refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshActionPerformed(evt);
+            }
+        });
+        jPanel9.add(refresh);
+        refresh.setBounds(580, 190, 90, 30);
 
         jPanel1.add(jPanel9);
         jPanel9.setBounds(0, 190, 790, 230);
@@ -318,7 +365,9 @@ public class viewCustomer extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_searchKeyPressed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-
+        
+        System.out.println(""+checkContact(cu_contact.getText()));
+        
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String fd = dateFormat.format(cu_birthdate.getDate());
 
@@ -334,21 +383,31 @@ public class viewCustomer extends javax.swing.JInternalFrame {
                 + "(cu_lname, cu_fname, cu_mname, cu_contact, "
                 + "cu_gender, cu_nationality, cu_address, cu_birthdate, "
                 + "cu_birthplace, cu_marital, cu_occupation)"
-                + "VALUES('"+cu_lname.getText()+"','"+cu_fname.getText()+"', '"+cu_mname.getText()+"', '"+cu_contact.getText()+"', "
+                + "VALUES('"+cu_lname.getText()+"','"+cu_fname.getText()+"', '"+cu_mname.getText()+"', '"+checkContact(cu_contact.getText())+"', "
                 + " '"+gender+"', '"+cu_nationality.getText()+"', '"+cu_address.getText()+"', '"+fd+"', "
                 + " '"+cu_birthplace.getText()+"', '"+cu_marital.getSelectedItem()+"', '"+cu_occupation.getText()+"' )"))
         {
             JOptionPane.showMessageDialog(null, "Insert Successfully");
             displayData();
+            clearFields();
         }else{
             JOptionPane.showMessageDialog(null, "Connection Error");
         }
        
     }//GEN-LAST:event_addActionPerformed
 
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        clearFields();
+    }//GEN-LAST:event_clearActionPerformed
+
+    private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
+        displayData();
+    }//GEN-LAST:event_refreshActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
+    private javax.swing.JButton clear;
     private javax.swing.JTextField cu_address;
     private com.toedter.calendar.JDateChooser cu_birthdate;
     private javax.swing.JTextField cu_birthplace;
@@ -373,18 +432,17 @@ public class viewCustomer extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton male;
+    private javax.swing.JButton refresh;
     private javax.swing.JTextField search;
     // End of variables declaration//GEN-END:variables
 }
