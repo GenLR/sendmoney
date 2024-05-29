@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2024 at 05:51 AM
+-- Generation Time: May 23, 2024 at 06:12 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,22 +24,32 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_contact`
+--
+
+CREATE TABLE `tbl_contact` (
+  `co_id` int(20) NOT NULL,
+  `co_number` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_customer`
 --
 
 CREATE TABLE `tbl_customer` (
   `cu_id` int(20) NOT NULL,
-  `cu_name` varchar(100) NOT NULL,
-  `cu_moreinfo` int(20) NOT NULL
+  `cu_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_customer`
 --
 
-INSERT INTO `tbl_customer` (`cu_id`, `cu_name`, `cu_moreinfo`) VALUES
-(1, 'Princess Nacua', 1),
-(2, 'Heath Caparas', 2);
+INSERT INTO `tbl_customer` (`cu_id`, `cu_name`) VALUES
+(1, 'Princess Nacua'),
+(2, 'Heath Caparas');
 
 -- --------------------------------------------------------
 
@@ -49,22 +59,16 @@ INSERT INTO `tbl_customer` (`cu_id`, `cu_name`, `cu_moreinfo`) VALUES
 
 CREATE TABLE `tbl_customermore` (
   `more_id` int(20) NOT NULL,
+  `cu_name` int(20) NOT NULL,
+  `cu_contact` int(20) NOT NULL,
   `cu_gender` varchar(100) NOT NULL,
-  `cu_nationality` varchar(200) NOT NULL,
+  `cu_nationality` varchar(100) NOT NULL,
   `cu_address` varchar(100) NOT NULL,
   `cu_birthdate` date NOT NULL,
   `cu_birthplace` varchar(100) NOT NULL,
   `cu_marital` varchar(100) NOT NULL,
   `cu_occupation` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_customermore`
---
-
-INSERT INTO `tbl_customermore` (`more_id`, `cu_gender`, `cu_nationality`, `cu_address`, `cu_birthdate`, `cu_birthplace`, `cu_marital`, `cu_occupation`) VALUES
-(1, 'Female', 'Filipino', 'Bacay, Tulay, Minglanilla, Cebu', '2002-08-22', 'Cebu City', 'Single', 'Student'),
-(2, 'Male', 'Filipino', 'Lower Calajoan, Minglanilla, Cebu', '2000-04-01', 'Cebu City', 'Single', 'Manager');
 
 -- --------------------------------------------------------
 
@@ -97,7 +101,7 @@ INSERT INTO `tbl_loyaltycard` (`lo_cardno.`, `lo_name`, `lo_sent`, `lo_recieved`
 CREATE TABLE `tbl_receiver` (
   `re_id` int(20) NOT NULL,
   `re_name` int(100) NOT NULL,
-  `re_contact` varchar(100) NOT NULL,
+  `re_contact` int(20) NOT NULL,
   `re_card` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -110,7 +114,7 @@ CREATE TABLE `tbl_receiver` (
 CREATE TABLE `tbl_sender` (
   `se_id` int(20) NOT NULL,
   `se_name` int(100) NOT NULL,
-  `se_contact` varchar(100) NOT NULL,
+  `se_contact` int(20) NOT NULL,
   `se_card` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -162,17 +166,24 @@ INSERT INTO `tbl_user` (`employeeid`, `fullname`, `acctype`, `username`, `passwo
 --
 
 --
+-- Indexes for table `tbl_contact`
+--
+ALTER TABLE `tbl_contact`
+  ADD PRIMARY KEY (`co_id`);
+
+--
 -- Indexes for table `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
-  ADD PRIMARY KEY (`cu_id`),
-  ADD KEY `cu_moreinfo` (`cu_moreinfo`);
+  ADD PRIMARY KEY (`cu_id`);
 
 --
 -- Indexes for table `tbl_customermore`
 --
 ALTER TABLE `tbl_customermore`
-  ADD PRIMARY KEY (`more_id`);
+  ADD PRIMARY KEY (`more_id`),
+  ADD KEY `cu_name` (`cu_name`),
+  ADD KEY `cu_contact` (`cu_contact`);
 
 --
 -- Indexes for table `tbl_loyaltycard`
@@ -186,14 +197,16 @@ ALTER TABLE `tbl_loyaltycard`
 --
 ALTER TABLE `tbl_receiver`
   ADD PRIMARY KEY (`re_id`),
-  ADD KEY `re_name` (`re_name`);
+  ADD KEY `re_name` (`re_name`),
+  ADD KEY `re_contact` (`re_contact`);
 
 --
 -- Indexes for table `tbl_sender`
 --
 ALTER TABLE `tbl_sender`
   ADD PRIMARY KEY (`se_id`),
-  ADD KEY `se_name` (`se_name`);
+  ADD KEY `se_name` (`se_name`),
+  ADD KEY `se_contact` (`se_contact`);
 
 --
 -- Indexes for table `tbl_transactions`
@@ -214,6 +227,12 @@ ALTER TABLE `tbl_user`
 --
 
 --
+-- AUTO_INCREMENT for table `tbl_contact`
+--
+ALTER TABLE `tbl_contact`
+  MODIFY `co_id` int(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
@@ -223,7 +242,7 @@ ALTER TABLE `tbl_customer`
 -- AUTO_INCREMENT for table `tbl_customermore`
 --
 ALTER TABLE `tbl_customermore`
-  MODIFY `more_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `more_id` int(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_receiver`
@@ -248,10 +267,11 @@ ALTER TABLE `tbl_transactions`
 --
 
 --
--- Constraints for table `tbl_customer`
+-- Constraints for table `tbl_customermore`
 --
-ALTER TABLE `tbl_customer`
-  ADD CONSTRAINT `tbl_customer_ibfk_1` FOREIGN KEY (`cu_moreinfo`) REFERENCES `tbl_customermore` (`more_id`);
+ALTER TABLE `tbl_customermore`
+  ADD CONSTRAINT `tbl_customermore_ibfk_1` FOREIGN KEY (`cu_name`) REFERENCES `tbl_customer` (`cu_id`),
+  ADD CONSTRAINT `tbl_customermore_ibfk_2` FOREIGN KEY (`cu_contact`) REFERENCES `tbl_contact` (`co_id`);
 
 --
 -- Constraints for table `tbl_loyaltycard`
@@ -263,13 +283,15 @@ ALTER TABLE `tbl_loyaltycard`
 -- Constraints for table `tbl_receiver`
 --
 ALTER TABLE `tbl_receiver`
-  ADD CONSTRAINT `tbl_receiver_ibfk_1` FOREIGN KEY (`re_name`) REFERENCES `tbl_customer` (`cu_id`);
+  ADD CONSTRAINT `tbl_receiver_ibfk_1` FOREIGN KEY (`re_name`) REFERENCES `tbl_customer` (`cu_id`),
+  ADD CONSTRAINT `tbl_receiver_ibfk_2` FOREIGN KEY (`re_contact`) REFERENCES `tbl_contact` (`co_id`);
 
 --
 -- Constraints for table `tbl_sender`
 --
 ALTER TABLE `tbl_sender`
-  ADD CONSTRAINT `tbl_sender_ibfk_1` FOREIGN KEY (`se_name`) REFERENCES `tbl_customer` (`cu_id`);
+  ADD CONSTRAINT `tbl_sender_ibfk_1` FOREIGN KEY (`se_name`) REFERENCES `tbl_customer` (`cu_id`),
+  ADD CONSTRAINT `tbl_sender_ibfk_2` FOREIGN KEY (`se_contact`) REFERENCES `tbl_contact` (`co_id`);
 
 --
 -- Constraints for table `tbl_transactions`
