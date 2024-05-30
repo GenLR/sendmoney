@@ -61,6 +61,22 @@ public class sendMoney extends javax.swing.JInternalFrame {
         
     }
     
+    public static int getRate(int fee){
+        int totalfee, initialfee;
+        
+            if(fee >= 1 && fee <= 1000){
+                initialfee = fee / 100;
+                    if((fee % 100) != 0){
+                        initialfee += 1;
+                    }
+                totalfee = initialfee * 3;
+            }else{
+                totalfee = 500;
+            }
+
+        return totalfee;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -95,7 +111,6 @@ public class sendMoney extends javax.swing.JInternalFrame {
         retoreceiver = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         code = new javax.swing.JTextField();
-        amount = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -107,6 +122,7 @@ public class sendMoney extends javax.swing.JInternalFrame {
         generateCode = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
+        amount = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(800, 459));
 
@@ -316,8 +332,6 @@ public class sendMoney extends javax.swing.JInternalFrame {
         jLabel19.setBounds(430, 190, 80, 20);
         jPanel1.add(code);
         code.setBounds(120, 20, 170, 30);
-        jPanel1.add(amount);
-        amount.setBounds(530, 190, 250, 30);
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(19, 53, 112));
@@ -403,6 +417,14 @@ public class sendMoney extends javax.swing.JInternalFrame {
         jPanel1.add(generateCode);
         generateCode.setBounds(300, 20, 70, 30);
 
+        amount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                amountKeyReleased(evt);
+            }
+        });
+        jPanel1.add(amount);
+        amount.setBounds(530, 190, 250, 30);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -432,13 +454,13 @@ public class sendMoney extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_generateCodeMouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        
+  /*      
         dbConnector dbc = new dbConnector();
         
         if(!send_name.getText().equalsIgnoreCase(receive_name.getText())){
             System.out.println("Name Found");
             
-        /*    if(dbc.insertData("INSERT INTO tbl_sender (se_name, se_contact, se_card) "
+            if(dbc.insertData("INSERT INTO tbl_sender (se_name, se_contact, se_card) "
                     + "SELECT cu_id, '"+send_contact.getText()+"', '"+send_card.getText()+"' "
                     + "FROM tbl_customer "
                     + "WHERE cu_name = '"+send_name.getText()+"' ")){
@@ -458,7 +480,7 @@ public class sendMoney extends javax.swing.JInternalFrame {
                         + "FROM tbl_sender s "
                         + "INNER JOIN tbl_receiver r ON tbl_receiver.re_id = tbl_transantion.tr_id"
                         + "WHERE cu_name = '"+send_name.getText()+"' AND cu_name = '"+receive_name.getText()+"' ");
-        */
+        
         
             dbc.insertData("INSERT INTO tbl_transactions t (tr_sender, tr_receiver, tr_location, tr_amount, tr_charge, tr_code, re_datesent, re_datereceived)" +
                     "VALUES ( "
@@ -476,6 +498,7 @@ public class sendMoney extends javax.swing.JInternalFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Connection Error");
         }
+ */       
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void send_nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_send_nameFocusLost
@@ -497,6 +520,22 @@ public class sendMoney extends javax.swing.JInternalFrame {
             re_cus.setText("");
         }
     }//GEN-LAST:event_receive_nameFocusLost
+
+    private void amountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_amountKeyReleased
+        
+        if(!amount.getText().isEmpty()){
+            try {
+                int intAmount = Integer.parseInt(amount.getText());
+                String strCharge = Integer.toString(getRate(intAmount));
+                charge.setText(strCharge);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, ""+amount.getText()+" should be numerical" );
+            }
+        }else{
+            charge.setText("");
+        }
+        
+    }//GEN-LAST:event_amountKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

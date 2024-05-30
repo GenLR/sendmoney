@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2024 at 06:12 AM
+-- Generation Time: May 30, 2024 at 04:35 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,6 +32,18 @@ CREATE TABLE `tbl_contact` (
   `co_number` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tbl_contact`
+--
+
+INSERT INTO `tbl_contact` (`co_id`, `co_number`) VALUES
+(1, '09456916230'),
+(2, '09456891230'),
+(3, '09456365981'),
+(4, '09295621923'),
+(5, '09048621236'),
+(6, '09397891010');
+
 -- --------------------------------------------------------
 
 --
@@ -40,26 +52,9 @@ CREATE TABLE `tbl_contact` (
 
 CREATE TABLE `tbl_customer` (
   `cu_id` int(20) NOT NULL,
-  `cu_name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_customer`
---
-
-INSERT INTO `tbl_customer` (`cu_id`, `cu_name`) VALUES
-(1, 'Princess Nacua'),
-(2, 'Heath Caparas');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_customermore`
---
-
-CREATE TABLE `tbl_customermore` (
-  `more_id` int(20) NOT NULL,
-  `cu_name` int(20) NOT NULL,
+  `cu_lname` varchar(100) NOT NULL,
+  `cu_fname` varchar(100) NOT NULL,
+  `cu_mname` varchar(100) NOT NULL,
   `cu_contact` int(20) NOT NULL,
   `cu_gender` varchar(100) NOT NULL,
   `cu_nationality` varchar(100) NOT NULL,
@@ -69,6 +64,18 @@ CREATE TABLE `tbl_customermore` (
   `cu_marital` varchar(100) NOT NULL,
   `cu_occupation` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_customer`
+--
+
+INSERT INTO `tbl_customer` (`cu_id`, `cu_lname`, `cu_fname`, `cu_mname`, `cu_contact`, `cu_gender`, `cu_nationality`, `cu_address`, `cu_birthdate`, `cu_birthplace`, `cu_marital`, `cu_occupation`) VALUES
+(1, 'Nacua', 'Princess', 'none', 1, 'Female', 'Filipino', 'Lower Calajo-an, Minglanilla, Cebu', '2003-03-12', 'Minglanilla, Cebu', 'Single', 'student'),
+(2, 'Caparas', 'Heath', 'none', 2, 'Male', 'Filipino', 'Cadulawan, Minglanilla, Cebu', '2024-05-29', 'Cebu, City', 'Single', 'Photographer'),
+(3, 'Anuba', 'Jamaica', 'none', 3, 'female', 'Spy', 'City of Talisay', '2003-11-05', 'City of Talisay', 'Single', 'Student'),
+(4, 'Arpilang', 'James', 'none', 4, 'Male', 'Filipino', 'Tabunok, City of Talisay, Cebu', '2000-08-12', 'Mindanao', 'Separated', 'Janitor'),
+(5, 'Cañete', 'Angel', 'Ibalarrosa', 5, 'female', 'Filipino', 'Cogon, City of Naga, Cebu', '2003-04-27', 'Minglanilla District Hospital', 'Married', 'Housewife'),
+(6, 'Peritos', 'Jeralyn', '', 6, 'Male', 'Filipino', 'Bacay, Tulay, Minglanilla, Cebu', '2004-08-12', 'Minglanilla, Cebu', 'Married', 'Manager');
 
 -- --------------------------------------------------------
 
@@ -95,39 +102,17 @@ INSERT INTO `tbl_loyaltycard` (`lo_cardno.`, `lo_name`, `lo_sent`, `lo_recieved`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_receiver`
---
-
-CREATE TABLE `tbl_receiver` (
-  `re_id` int(20) NOT NULL,
-  `re_name` int(100) NOT NULL,
-  `re_contact` int(20) NOT NULL,
-  `re_card` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_sender`
---
-
-CREATE TABLE `tbl_sender` (
-  `se_id` int(20) NOT NULL,
-  `se_name` int(100) NOT NULL,
-  `se_contact` int(20) NOT NULL,
-  `se_card` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbl_transactions`
 --
 
 CREATE TABLE `tbl_transactions` (
   `tr_id` int(20) NOT NULL,
-  `tr_senderinfo` int(20) NOT NULL,
-  `tr_receiverinfo` int(20) NOT NULL,
+  `tr_sender` int(20) NOT NULL,
+  `tr_senderno` int(20) NOT NULL,
+  `tr_sendercard` varchar(20) NOT NULL,
+  `tr_receiver` int(20) NOT NULL,
+  `tr_receiverno` int(20) NOT NULL,
+  `tr_receivercard` varchar(20) NOT NULL,
   `tr_location` varchar(100) NOT NULL,
   `tr_amount` decimal(10,0) NOT NULL,
   `tr_charge` decimal(10,0) NOT NULL,
@@ -175,14 +160,7 @@ ALTER TABLE `tbl_contact`
 -- Indexes for table `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
-  ADD PRIMARY KEY (`cu_id`);
-
---
--- Indexes for table `tbl_customermore`
---
-ALTER TABLE `tbl_customermore`
-  ADD PRIMARY KEY (`more_id`),
-  ADD KEY `cu_name` (`cu_name`),
+  ADD PRIMARY KEY (`cu_id`),
   ADD KEY `cu_contact` (`cu_contact`);
 
 --
@@ -193,28 +171,12 @@ ALTER TABLE `tbl_loyaltycard`
   ADD KEY `lo_name` (`lo_name`);
 
 --
--- Indexes for table `tbl_receiver`
---
-ALTER TABLE `tbl_receiver`
-  ADD PRIMARY KEY (`re_id`),
-  ADD KEY `re_name` (`re_name`),
-  ADD KEY `re_contact` (`re_contact`);
-
---
--- Indexes for table `tbl_sender`
---
-ALTER TABLE `tbl_sender`
-  ADD PRIMARY KEY (`se_id`),
-  ADD KEY `se_name` (`se_name`),
-  ADD KEY `se_contact` (`se_contact`);
-
---
 -- Indexes for table `tbl_transactions`
 --
 ALTER TABLE `tbl_transactions`
   ADD PRIMARY KEY (`tr_id`),
-  ADD KEY `tr_senderinfo` (`tr_senderinfo`),
-  ADD KEY `tr_receiverinfo` (`tr_receiverinfo`);
+  ADD KEY `tr_senderinfo` (`tr_sender`),
+  ADD KEY `tr_receiverinfo` (`tr_receiver`);
 
 --
 -- Indexes for table `tbl_user`
@@ -230,31 +192,13 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_contact`
 --
 ALTER TABLE `tbl_contact`
-  MODIFY `co_id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `co_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
-  MODIFY `cu_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `tbl_customermore`
---
-ALTER TABLE `tbl_customermore`
-  MODIFY `more_id` int(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tbl_receiver`
---
-ALTER TABLE `tbl_receiver`
-  MODIFY `re_id` int(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tbl_sender`
---
-ALTER TABLE `tbl_sender`
-  MODIFY `se_id` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `cu_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_transactions`
@@ -267,11 +211,10 @@ ALTER TABLE `tbl_transactions`
 --
 
 --
--- Constraints for table `tbl_customermore`
+-- Constraints for table `tbl_customer`
 --
-ALTER TABLE `tbl_customermore`
-  ADD CONSTRAINT `tbl_customermore_ibfk_1` FOREIGN KEY (`cu_name`) REFERENCES `tbl_customer` (`cu_id`),
-  ADD CONSTRAINT `tbl_customermore_ibfk_2` FOREIGN KEY (`cu_contact`) REFERENCES `tbl_contact` (`co_id`);
+ALTER TABLE `tbl_customer`
+  ADD CONSTRAINT `tbl_customer_ibfk_1` FOREIGN KEY (`cu_contact`) REFERENCES `tbl_contact` (`co_id`);
 
 --
 -- Constraints for table `tbl_loyaltycard`
@@ -280,25 +223,11 @@ ALTER TABLE `tbl_loyaltycard`
   ADD CONSTRAINT `tbl_loyaltycard_ibfk_1` FOREIGN KEY (`lo_name`) REFERENCES `tbl_customer` (`cu_id`);
 
 --
--- Constraints for table `tbl_receiver`
---
-ALTER TABLE `tbl_receiver`
-  ADD CONSTRAINT `tbl_receiver_ibfk_1` FOREIGN KEY (`re_name`) REFERENCES `tbl_customer` (`cu_id`),
-  ADD CONSTRAINT `tbl_receiver_ibfk_2` FOREIGN KEY (`re_contact`) REFERENCES `tbl_contact` (`co_id`);
-
---
--- Constraints for table `tbl_sender`
---
-ALTER TABLE `tbl_sender`
-  ADD CONSTRAINT `tbl_sender_ibfk_1` FOREIGN KEY (`se_name`) REFERENCES `tbl_customer` (`cu_id`),
-  ADD CONSTRAINT `tbl_sender_ibfk_2` FOREIGN KEY (`se_contact`) REFERENCES `tbl_contact` (`co_id`);
-
---
 -- Constraints for table `tbl_transactions`
 --
 ALTER TABLE `tbl_transactions`
-  ADD CONSTRAINT `tbl_transactions_ibfk_1` FOREIGN KEY (`tr_senderinfo`) REFERENCES `tbl_sender` (`se_id`),
-  ADD CONSTRAINT `tbl_transactions_ibfk_2` FOREIGN KEY (`tr_receiverinfo`) REFERENCES `tbl_receiver` (`re_id`);
+  ADD CONSTRAINT `tbl_transactions_ibfk_1` FOREIGN KEY (`tr_sender`) REFERENCES `tbl_customer` (`cu_id`),
+  ADD CONSTRAINT `tbl_transactions_ibfk_2` FOREIGN KEY (`tr_receiver`) REFERENCES `tbl_customer` (`cu_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

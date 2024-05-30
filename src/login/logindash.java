@@ -3,10 +3,16 @@ package login;
 
 import admin.admindash;
 import config.*;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import teller.tellerdash;
 
 public class logindash extends javax.swing.JFrame {
@@ -14,6 +20,7 @@ public class logindash extends javax.swing.JFrame {
     
     public logindash() {
         initComponents();
+        updateTimeAndDate();
     }
 
     public static boolean loginAccount(String username, String password, String empid){
@@ -26,13 +33,7 @@ public class logindash extends javax.swing.JFrame {
             if(rs.next()){
                 String hashedPass = rs.getString("password");
                 
-                System.out.println(""+rs.getString("employeeid"));
-                System.out.println(""+rs.getString("username"));
-                System.out.println(""+rs.getString("password"));
-                System.out.println(""+passHash.hashPassword(password));
-                
                 if(passHash.hashPassword(password).equals(hashedPass)){
-                    System.out.println("HERE");
                     Session ses =  Session.getInstance();
                         ses.setEid("employeeid");
                         ses.setName(rs.getString("fullname"));
@@ -40,7 +41,6 @@ public class logindash extends javax.swing.JFrame {
                         ses.setPassword(rs.getString("password"));
                         ses.setAcctype(rs.getString("acctype"));
                         ses.setStatus(rs.getString("status"));
-                        System.out.println("THERE");
 
                     return true;
                 }else{
@@ -56,28 +56,42 @@ public class logindash extends javax.swing.JFrame {
         }
     }
     
+    private void updateTimeAndDate(){
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DateTimeFormatter times = DateTimeFormatter.ofPattern("HH:mm:ss");
+                LocalDateTime now = LocalDateTime.now();
+                time.setText(times.format(now));
+                
+                DateTimeFormatter dates = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+                date.setText(dates.format(now));
+            }
+        });
+        timer.start();
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         log_id = new javax.swing.JTextField();
-        log_user = new javax.swing.JTextField();
         log_pass = new javax.swing.JTextField();
-        login = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        log_user = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        login = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        date = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -86,47 +100,25 @@ public class logindash extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 450));
         jPanel1.setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(60, 120, 240));
-        jPanel2.setMinimumSize(new java.awt.Dimension(400, 539));
-        jPanel2.setPreferredSize(new java.awt.Dimension(400, 539));
-        jPanel2.setLayout(null);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logomoney-removebg-preview.png"))); // NOI18N
-        jPanel2.add(jLabel1);
-        jLabel1.setBounds(-10, 70, 313, 313);
-
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 300, 450);
-
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setOpaque(false);
         jPanel6.setLayout(null);
 
-        jLabel3.setFont(new java.awt.Font("Segoe Print", 1, 60)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(40, 120, 240));
-        jLabel3.setText("where");
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("where money flies");
         jPanel6.add(jLabel3);
-        jLabel3.setBounds(90, 0, 182, 50);
-
-        jLabel4.setFont(new java.awt.Font("Segoe Print", 1, 60)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(40, 120, 240));
-        jLabel4.setText("money");
-        jPanel6.add(jLabel4);
-        jLabel4.setBounds(70, 20, 200, 90);
-
-        jLabel2.setFont(new java.awt.Font("Segoe Print", 1, 60)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(40, 120, 240));
-        jLabel2.setText("flies");
-        jPanel6.add(jLabel2);
-        jLabel2.setBounds(160, 90, 112, 60);
+        jLabel3.setBounds(220, 10, 250, 50);
 
         jPanel5.setBackground(new java.awt.Color(255, 204, 0));
-        jPanel5.setPreferredSize(new java.awt.Dimension(280, 5));
+        jPanel5.setPreferredSize(new java.awt.Dimension(280, 2));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
+            .addGap(0, 520, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,10 +126,10 @@ public class logindash extends javax.swing.JFrame {
         );
 
         jPanel6.add(jPanel5);
-        jPanel5.setBounds(0, 150, 270, 5);
+        jPanel5.setBounds(0, 50, 520, 2);
 
         jPanel1.add(jPanel6);
-        jPanel6.setBounds(310, 30, 280, 160);
+        jPanel6.setBounds(50, 200, 520, 70);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(null);
@@ -152,16 +144,6 @@ public class logindash extends javax.swing.JFrame {
         jPanel3.add(log_id);
         log_id.setBounds(40, 120, 190, 30);
 
-        log_user.setBackground(new java.awt.Color(230, 230, 230));
-        log_user.setForeground(new java.awt.Color(102, 102, 102));
-        log_user.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                log_userActionPerformed(evt);
-            }
-        });
-        jPanel3.add(log_user);
-        log_user.setBounds(40, 20, 190, 30);
-
         log_pass.setBackground(new java.awt.Color(230, 230, 230));
         log_pass.setForeground(new java.awt.Color(102, 102, 102));
         log_pass.addActionListener(new java.awt.event.ActionListener() {
@@ -172,71 +154,87 @@ public class logindash extends javax.swing.JFrame {
         jPanel3.add(log_pass);
         log_pass.setBounds(40, 70, 190, 30);
 
-        login.setBackground(new java.awt.Color(60, 120, 240));
-        login.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                loginMouseClicked(evt);
+        log_user.setBackground(new java.awt.Color(230, 230, 230));
+        log_user.setForeground(new java.awt.Color(102, 102, 102));
+        log_user.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                log_userActionPerformed(evt);
             }
         });
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("LOGIN");
-
-        javax.swing.GroupLayout loginLayout = new javax.swing.GroupLayout(login);
-        login.setLayout(loginLayout);
-        loginLayout.setHorizontalGroup(
-            loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(loginLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-        loginLayout.setVerticalGroup(
-            loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        );
-
-        jPanel3.add(login);
-        login.setBounds(90, 160, 100, 30);
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(19, 53, 112));
-        jLabel11.setText("Employee ID");
-        jPanel3.add(jLabel11);
-        jLabel11.setBounds(40, 100, 80, 20);
+        jPanel3.add(log_user);
+        log_user.setBounds(40, 20, 190, 30);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(19, 53, 112));
         jLabel12.setText("Username");
         jPanel3.add(jLabel12);
-        jLabel12.setBounds(40, 0, 60, 20);
+        jLabel12.setBounds(20, 0, 60, 30);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(19, 53, 112));
         jLabel13.setText("Password");
         jPanel3.add(jLabel13);
-        jLabel13.setBounds(40, 50, 60, 20);
+        jLabel13.setBounds(20, 50, 60, 30);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(19, 53, 112));
+        jLabel11.setText("Employee ID");
+        jPanel3.add(jLabel11);
+        jLabel11.setBounds(20, 100, 80, 30);
+
+        login.setBackground(new java.awt.Color(60, 120, 240));
+        login.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        login.setForeground(new java.awt.Color(255, 255, 255));
+        login.setText("LOGIN");
+        login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginActionPerformed(evt);
+            }
+        });
+        jPanel3.add(login);
+        login.setBounds(80, 160, 100, 30);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(320, 200, 270, 200);
+        jPanel3.setBounds(170, 260, 270, 200);
 
-        jLabel6.setText("Date         |        Time");
-        jPanel1.add(jLabel6);
-        jLabel6.setBounds(480, 430, 120, 20);
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel7.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, 20));
+        jPanel7.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 60, 20));
+
+        jPanel8.setBackground(new java.awt.Color(60, 120, 240));
+        jPanel8.setPreferredSize(new java.awt.Dimension(1, 25));
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 25, Short.MAX_VALUE)
+        );
+
+        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
+
+        jPanel1.add(jPanel7);
+        jPanel7.setBounds(420, 10, 170, 30);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money-remittance (1).png"))); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(110, 50, 390, 200);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -248,16 +246,15 @@ public class logindash extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_log_idActionPerformed
 
-    private void log_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_log_userActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_log_userActionPerformed
-
     private void log_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_log_passActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_log_passActionPerformed
 
-    private void loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMouseClicked
-        
+    private void log_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_log_userActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_log_userActionPerformed
+
+    private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         Session ses = Session.getInstance();
         
         if(loginAccount(log_user.getText(), log_pass.getText(), log_id.getText())){
@@ -283,7 +280,7 @@ public class logindash extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "No Account found"); 
         }
-    }//GEN-LAST:event_loginMouseClicked
+    }//GEN-LAST:event_loginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,23 +318,22 @@ public class logindash extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel date;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JTextField log_id;
     private javax.swing.JTextField log_pass;
     private javax.swing.JTextField log_user;
-    private javax.swing.JPanel login;
+    private javax.swing.JButton login;
+    private javax.swing.JLabel time;
     // End of variables declaration//GEN-END:variables
 }

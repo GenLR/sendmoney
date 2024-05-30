@@ -6,7 +6,12 @@
 package teller;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import login.logindash;
 import user.internalpages.*;
 
@@ -15,7 +20,22 @@ public class tellerdash extends javax.swing.JFrame {
     
     public tellerdash() {
         initComponents();
-        
+        updateTimeAndDate();
+    }
+    
+    private void updateTimeAndDate(){
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DateTimeFormatter times = DateTimeFormatter.ofPattern("HH:mm:ss");
+                LocalDateTime now = LocalDateTime.now();
+                time.setText(times.format(now));
+                
+                DateTimeFormatter dates = DateTimeFormatter.ofPattern("MM-dd-yyy");
+                date.setText(dates.format(now));
+            }
+        });
+        timer.start();
     }
     
     Color myYellow = new Color(255,204,51);
@@ -39,6 +59,10 @@ public class tellerdash extends javax.swing.JFrame {
         transaction = new javax.swing.JLabel();
         customer = new javax.swing.JLabel();
         logout = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        date = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
         tellerpages = new javax.swing.JDesktopPane();
 
         confirmOut.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -71,7 +95,8 @@ public class tellerdash extends javax.swing.JFrame {
         jPanel2.add(jLabel2);
         jLabel2.setBounds(110, 10, 99, 17);
 
-        jPanel3.setPreferredSize(new java.awt.Dimension(5, 25));
+        jPanel3.setMinimumSize(new java.awt.Dimension(1, 30));
+        jPanel3.setPreferredSize(new java.awt.Dimension(1, 25));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -85,9 +110,9 @@ public class tellerdash extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel3);
-        jPanel3.setBounds(145, 40, 5, 30);
+        jPanel3.setBounds(130, 40, 1, 30);
 
-        jPanel4.setPreferredSize(new java.awt.Dimension(5, 25));
+        jPanel4.setPreferredSize(new java.awt.Dimension(1, 25));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -101,9 +126,9 @@ public class tellerdash extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel4);
-        jPanel4.setBounds(310, 40, 5, 30);
+        jPanel4.setBounds(285, 40, 1, 30);
 
-        jPanel5.setPreferredSize(new java.awt.Dimension(5, 25));
+        jPanel5.setPreferredSize(new java.awt.Dimension(1, 30));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -117,7 +142,7 @@ public class tellerdash extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel5);
-        jPanel5.setBounds(455, 40, 5, 30);
+        jPanel5.setBounds(430, 40, 1, 30);
 
         send.setBackground(new java.awt.Color(60, 120, 240));
         send.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -136,7 +161,7 @@ public class tellerdash extends javax.swing.JFrame {
             }
         });
         jPanel2.add(send);
-        send.setBounds(20, 40, 110, 30);
+        send.setBounds(10, 40, 110, 30);
 
         receive.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         receive.setForeground(new java.awt.Color(255, 204, 51));
@@ -154,7 +179,7 @@ public class tellerdash extends javax.swing.JFrame {
             }
         });
         jPanel2.add(receive);
-        receive.setBounds(160, 40, 136, 30);
+        receive.setBounds(140, 40, 136, 30);
 
         transaction.setBackground(new java.awt.Color(60, 120, 240));
         transaction.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -173,7 +198,7 @@ public class tellerdash extends javax.swing.JFrame {
             }
         });
         jPanel2.add(transaction);
-        transaction.setBounds(326, 40, 120, 30);
+        transaction.setBounds(300, 40, 120, 30);
 
         customer.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         customer.setForeground(new java.awt.Color(255, 204, 51));
@@ -191,7 +216,7 @@ public class tellerdash extends javax.swing.JFrame {
             }
         });
         jPanel2.add(customer);
-        customer.setBounds(470, 40, 136, 30);
+        customer.setBounds(440, 40, 136, 30);
 
         logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout.png"))); // NOI18N
         logout.setComponentPopupMenu(jPopupMenu1);
@@ -203,6 +228,29 @@ public class tellerdash extends javax.swing.JFrame {
         });
         jPanel2.add(logout);
         logout.setBounds(770, 0, 24, 40);
+
+        jPanel7.setBackground(new java.awt.Color(60, 120, 240));
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel7.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, 20));
+        jPanel7.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 60, 20));
+
+        jPanel8.setPreferredSize(new java.awt.Dimension(1, 25));
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 25, Short.MAX_VALUE)
+        );
+
+        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
+
+        jPanel2.add(jPanel7);
+        jPanel7.setBounds(630, 50, 170, 30);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 800, 80);
@@ -346,6 +394,7 @@ public class tellerdash extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem confirmOut;
     private javax.swing.JLabel customer;
+    private javax.swing.JLabel date;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -353,11 +402,14 @@ public class tellerdash extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JLabel logout;
     private javax.swing.JLabel receive;
     private javax.swing.JLabel send;
     private javax.swing.JDesktopPane tellerpages;
+    private javax.swing.JLabel time;
     private javax.swing.JLabel transaction;
     // End of variables declaration//GEN-END:variables
 }
