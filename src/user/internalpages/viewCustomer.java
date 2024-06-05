@@ -101,6 +101,7 @@ public class viewCustomer extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         genderGroup = new javax.swing.ButtonGroup();
+        genBackground1 = new config.genBackground();
         jPanel1 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -122,26 +123,25 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         cu_contact = new javax.swing.JTextField();
         cu_mname = new javax.swing.JTextField();
         cu_fname = new javax.swing.JTextField();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel35 = new javax.swing.JLabel();
         cu_occupation = new javax.swing.JTextField();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
-        add = new javax.swing.JButton();
         male = new javax.swing.JRadioButton();
         female = new javax.swing.JRadioButton();
         cu_birthdate = new com.toedter.calendar.JDateChooser();
         cu_marital = new javax.swing.JComboBox<>();
         clear = new javax.swing.JButton();
         refresh = new javax.swing.JButton();
-        search = new javax.swing.JTextField();
+        add = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
+        search = new javax.swing.JTextField();
 
-        setPreferredSize(new java.awt.Dimension(800, 459));
+        setPreferredSize(new java.awt.Dimension(1000, 459));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
 
         jPanel6.setBackground(new java.awt.Color(20, 120, 240));
@@ -150,13 +150,16 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(customer_table);
 
         jPanel6.add(jScrollPane1);
-        jScrollPane1.setBounds(0, 0, 780, 150);
+        jScrollPane1.setBounds(0, 0, 980, 150);
 
         jPanel1.add(jPanel6);
-        jPanel6.setBounds(10, 40, 780, 150);
+        jPanel6.setBounds(10, 40, 980, 150);
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setOpaque(false);
         jPanel9.setLayout(null);
+
+        cu_id.setBorder(javax.swing.BorderFactory.createTitledBorder("Customer ID"));
         jPanel9.add(cu_id);
         cu_id.setBounds(130, 0, 260, 30);
         jPanel9.add(cu_lname);
@@ -221,17 +224,6 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         cu_mname.setBounds(130, 90, 260, 30);
         jPanel9.add(cu_fname);
         cu_fname.setBounds(130, 60, 260, 30);
-
-        jPanel10.setBackground(new java.awt.Color(20, 120, 240));
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel35.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel35.setText("UPDATE");
-        jPanel10.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 31));
-
-        jPanel9.add(jPanel10);
-        jPanel10.setBounds(480, 190, 90, 31);
         jPanel9.add(cu_occupation);
         cu_occupation.setBounds(510, 150, 260, 30);
 
@@ -258,18 +250,6 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         jLabel40.setText("Customer ID");
         jPanel9.add(jLabel40);
         jLabel40.setBounds(30, 10, 80, 20);
-
-        add.setBackground(new java.awt.Color(20, 120, 240));
-        add.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        add.setForeground(new java.awt.Color(255, 255, 255));
-        add.setText("ADD");
-        add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addActionPerformed(evt);
-            }
-        });
-        jPanel9.add(add);
-        add.setBounds(380, 190, 90, 30);
 
         male.setBackground(new java.awt.Color(255, 255, 255));
         genderGroup.add(male);
@@ -302,7 +282,7 @@ public class viewCustomer extends javax.swing.JInternalFrame {
             }
         });
         jPanel9.add(clear);
-        clear.setBounds(680, 190, 90, 30);
+        clear.setBounds(890, 100, 90, 30);
 
         refresh.setBackground(new java.awt.Color(20, 120, 240));
         refresh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -314,51 +294,63 @@ public class viewCustomer extends javax.swing.JInternalFrame {
             }
         });
         jPanel9.add(refresh);
-        refresh.setBounds(580, 190, 90, 30);
+        refresh.setBounds(890, 60, 90, 30);
+
+        add.setBackground(new java.awt.Color(20, 120, 240));
+        add.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        add.setForeground(new java.awt.Color(255, 255, 255));
+        add.setText("ADD");
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
+        jPanel9.add(add);
+        add.setBounds(890, 20, 90, 30);
 
         jPanel1.add(jPanel9);
-        jPanel9.setBounds(0, 190, 790, 230);
-
-        search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchActionPerformed(evt);
-            }
-        });
-        search.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                searchKeyPressed(evt);
-            }
-        });
-        jPanel1.add(search);
-        search.setBounds(630, 10, 160, 30);
+        jPanel9.setBounds(0, 200, 990, 190);
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(19, 53, 112));
         jLabel25.setText("Search");
         jPanel1.add(jLabel25);
-        jLabel25.setBounds(590, 10, 50, 30);
+        jLabel25.setBounds(770, 10, 50, 30);
+
+        search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                searchKeyTyped(evt);
+            }
+        });
+        jPanel1.add(search);
+        search.setBounds(820, 10, 170, 30);
+
+        javax.swing.GroupLayout genBackground1Layout = new javax.swing.GroupLayout(genBackground1);
+        genBackground1.setLayout(genBackground1Layout);
+        genBackground1Layout.setHorizontalGroup(
+            genBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(genBackground1Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 994, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        genBackground1Layout.setVerticalGroup(
+            genBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(genBackground1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+            .addComponent(genBackground1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchActionPerformed
-
-    private void searchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyPressed
-        searchTable();
-    }//GEN-LAST:event_searchKeyPressed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         
@@ -371,7 +363,7 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         if(male.isSelected()){
             gender = "Male";
         }else{
-            gender = "female";
+            gender = "Female";
         }
         
         dbConnector dbc = new dbConnector();
@@ -400,6 +392,10 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         displayData();
     }//GEN-LAST:event_refreshActionPerformed
 
+    private void searchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyTyped
+        searchTable();
+    }//GEN-LAST:event_searchKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
@@ -417,6 +413,7 @@ public class viewCustomer extends javax.swing.JInternalFrame {
     private javax.swing.JTextField cu_occupation;
     private javax.swing.JTable customer_table;
     private javax.swing.JRadioButton female;
+    private config.genBackground genBackground1;
     private javax.swing.ButtonGroup genderGroup;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
@@ -427,13 +424,11 @@ public class viewCustomer extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;

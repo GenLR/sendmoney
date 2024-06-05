@@ -33,29 +33,36 @@ public class reportsPage extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        genBackground1 = new config.genBackground();
 
-        setPreferredSize(new java.awt.Dimension(800, 420));
+        setPreferredSize(new java.awt.Dimension(1000, 420));
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 420));
-        jPanel1.setLayout(null);
+        genBackground1.setPreferredSize(new java.awt.Dimension(1000, 420));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("No Reports Yet");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 350, 170, 40);
+        javax.swing.GroupLayout genBackground1Layout = new javax.swing.GroupLayout(genBackground1);
+        genBackground1.setLayout(genBackground1Layout);
+        genBackground1Layout.setHorizontalGroup(
+            genBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1000, Short.MAX_VALUE)
+        );
+        genBackground1Layout.setVerticalGroup(
+            genBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 420, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(genBackground1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(genBackground1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -63,7 +70,6 @@ public class reportsPage extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private config.genBackground genBackground1;
     // End of variables declaration//GEN-END:variables
 }

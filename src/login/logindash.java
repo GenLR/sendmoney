@@ -108,10 +108,8 @@ public class logindash extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        genBackground1 = new config.genBackground();
         jPanel1 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         log_id = new javax.swing.JTextField();
         log_pass = new javax.swing.JTextField();
@@ -125,50 +123,21 @@ public class logindash extends javax.swing.JFrame {
         time = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 450));
         jPanel1.setLayout(null);
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setOpaque(false);
-        jPanel6.setLayout(null);
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(40, 120, 240));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("where money flies");
-        jPanel6.add(jLabel3);
-        jLabel3.setBounds(220, 10, 250, 50);
-
-        jPanel5.setBackground(new java.awt.Color(255, 204, 0));
-        jPanel5.setPreferredSize(new java.awt.Dimension(280, 2));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jPanel6.add(jPanel5);
-        jPanel5.setBounds(0, 50, 520, 2);
-
-        jPanel1.add(jPanel6);
-        jPanel6.setBounds(50, 200, 520, 70);
-
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setOpaque(false);
         jPanel3.setLayout(null);
 
         log_id.setBackground(new java.awt.Color(230, 230, 230));
-        log_id.setForeground(new java.awt.Color(102, 102, 102));
         log_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 log_idActionPerformed(evt);
@@ -183,7 +152,6 @@ public class logindash extends javax.swing.JFrame {
         log_id.setBounds(40, 120, 190, 30);
 
         log_pass.setBackground(new java.awt.Color(230, 230, 230));
-        log_pass.setForeground(new java.awt.Color(102, 102, 102));
         log_pass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 log_passActionPerformed(evt);
@@ -198,7 +166,6 @@ public class logindash extends javax.swing.JFrame {
         log_pass.setBounds(40, 70, 190, 30);
 
         log_user.setBackground(new java.awt.Color(230, 230, 230));
-        log_user.setForeground(new java.awt.Color(102, 102, 102));
         log_user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 log_userActionPerformed(evt);
@@ -216,19 +183,19 @@ public class logindash extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(19, 53, 112));
         jLabel12.setText("Username");
         jPanel3.add(jLabel12);
-        jLabel12.setBounds(20, 0, 60, 30);
+        jLabel12.setBounds(20, 0, 60, 20);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(19, 53, 112));
         jLabel13.setText("Password");
         jPanel3.add(jLabel13);
-        jLabel13.setBounds(20, 50, 60, 30);
+        jLabel13.setBounds(20, 50, 60, 20);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(19, 53, 112));
         jLabel11.setText("Employee ID");
         jPanel3.add(jLabel11);
-        jLabel11.setBounds(20, 100, 80, 30);
+        jLabel11.setBounds(20, 100, 80, 20);
 
         login.setBackground(new java.awt.Color(60, 120, 240));
         login.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -243,9 +210,10 @@ public class logindash extends javax.swing.JFrame {
         login.setBounds(80, 160, 100, 30);
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(170, 260, 270, 200);
+        jPanel3.setBounds(170, 240, 270, 200);
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setOpaque(false);
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel7.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, 20));
         jPanel7.add(time, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 60, 20));
@@ -271,19 +239,35 @@ public class logindash extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money-remittance (1).png"))); // NOI18N
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(110, 50, 390, 200);
+        jLabel1.setBounds(110, 40, 390, 200);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(40, 120, 240));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("where money flies");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(300, 200, 250, 50);
+
+        javax.swing.GroupLayout genBackground1Layout = new javax.swing.GroupLayout(genBackground1);
+        genBackground1.setLayout(genBackground1Layout);
+        genBackground1Layout.setHorizontalGroup(
+            genBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        genBackground1Layout.setVerticalGroup(
+            genBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(genBackground1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(genBackground1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setSize(new java.awt.Dimension(616, 489));
@@ -361,6 +345,7 @@ public class logindash extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel date;
+    private config.genBackground genBackground1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -368,8 +353,6 @@ public class logindash extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JTextField log_id;

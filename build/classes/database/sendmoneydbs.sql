@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2024 at 04:35 PM
+-- Generation Time: Jun 05, 2024 at 06:15 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,29 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `sendmoneydbs`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_contact`
---
-
-CREATE TABLE `tbl_contact` (
-  `co_id` int(20) NOT NULL,
-  `co_number` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_contact`
---
-
-INSERT INTO `tbl_contact` (`co_id`, `co_number`) VALUES
-(1, '09456916230'),
-(2, '09456891230'),
-(3, '09456365981'),
-(4, '09295621923'),
-(5, '09048621236'),
-(6, '09397891010');
 
 -- --------------------------------------------------------
 
@@ -117,8 +94,7 @@ CREATE TABLE `tbl_transactions` (
   `tr_amount` decimal(10,0) NOT NULL,
   `tr_charge` decimal(10,0) NOT NULL,
   `tr_code` varchar(100) NOT NULL,
-  `tr_datesent` datetime(6) NOT NULL,
-  `tr_datereceived` datetime(6) NOT NULL
+  `tr_when` timestamp(6) NOT NULL DEFAULT current_timestamp(6) ON UPDATE current_timestamp(6)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -151,12 +127,6 @@ INSERT INTO `tbl_user` (`employeeid`, `fullname`, `acctype`, `username`, `passwo
 --
 
 --
--- Indexes for table `tbl_contact`
---
-ALTER TABLE `tbl_contact`
-  ADD PRIMARY KEY (`co_id`);
-
---
 -- Indexes for table `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
@@ -187,12 +157,6 @@ ALTER TABLE `tbl_user`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `tbl_contact`
---
-ALTER TABLE `tbl_contact`
-  MODIFY `co_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_customer`
