@@ -34,14 +34,7 @@ public class viewHistory extends javax.swing.JInternalFrame {
         if(search.getText().isEmpty()){
             try{
                 dbConnector dbc = new dbConnector();
-                ResultSet rs = dbc.getData("SELECT tr_id, tbl_sender.se_name, tbl_sender.se_contact, tbl_sender.se_card, tbl_receiver.re_name, tbl_receiver.re_contact, tbl_receiver.re_card, tr_location, tr_amount, tr_charge, tr_code, tr_datesent, tr_datereceived  \n" +
-                        "FROM `tbl_transactions`\n" +
-                        "\n" +
-                        "INNER JOIN tbl_sender \n" +
-                        "ON tbl_sender.se_id = tbl_transactions.tr_id \n" +
-                        "\n" +
-                        "INNER JOIN tbl_receiver \n" +
-                        "ON tbl_receiver.re_id = tbl_transactions.tr_id");
+                ResultSet rs = dbc.getData("SELECT * FROM tbl_transactions");
                 transaction_table.setModel(DbUtils.resultSetToTableModel(rs));
                 rs.close();
             }catch(SQLException ex){

@@ -2,6 +2,7 @@
 package login;
 
 import admin.admindash;
+import com.sun.glass.events.KeyEvent;
 import config.*;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -56,6 +57,36 @@ public class logindash extends javax.swing.JFrame {
         }
     }
     
+    private void getLogin(){
+        
+        Session ses = Session.getInstance();
+        
+        if(loginAccount(log_user.getText(), log_pass.getText(), log_id.getText())){
+            
+            if(ses.getStatus().equalsIgnoreCase("Active")){
+                
+                if(ses.getAcctype().equalsIgnoreCase("Admin")){
+                    JOptionPane.showMessageDialog(null, "Login Success");
+                    admindash adash = new admindash();
+                    adash.setVisible(true);
+                    this.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Login Success");
+                    tellerdash udash = new tellerdash();
+                    udash.setVisible(true);
+                    this.dispose();
+                }
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "Account not yet Activated");
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "No Account found"); 
+        }
+        
+    }
+    
     private void updateTimeAndDate(){
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
@@ -70,6 +101,8 @@ public class logindash extends javax.swing.JFrame {
         });
         timer.start();
     }
+    
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -141,6 +174,11 @@ public class logindash extends javax.swing.JFrame {
                 log_idActionPerformed(evt);
             }
         });
+        log_id.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                log_idKeyPressed(evt);
+            }
+        });
         jPanel3.add(log_id);
         log_id.setBounds(40, 120, 190, 30);
 
@@ -151,6 +189,11 @@ public class logindash extends javax.swing.JFrame {
                 log_passActionPerformed(evt);
             }
         });
+        log_pass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                log_passKeyPressed(evt);
+            }
+        });
         jPanel3.add(log_pass);
         log_pass.setBounds(40, 70, 190, 30);
 
@@ -159,6 +202,11 @@ public class logindash extends javax.swing.JFrame {
         log_user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 log_userActionPerformed(evt);
+            }
+        });
+        log_user.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                log_userKeyPressed(evt);
             }
         });
         jPanel3.add(log_user);
@@ -255,32 +303,26 @@ public class logindash extends javax.swing.JFrame {
     }//GEN-LAST:event_log_userActionPerformed
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-        Session ses = Session.getInstance();
-        
-        if(loginAccount(log_user.getText(), log_pass.getText(), log_id.getText())){
-            
-            if(ses.getStatus().equalsIgnoreCase("Active")){
-                
-                if(ses.getAcctype().equalsIgnoreCase("Admin")){
-                    JOptionPane.showMessageDialog(null, "Login Success");
-                    admindash adash = new admindash();
-                    adash.setVisible(true);
-                    this.dispose();
-                }else{
-                    JOptionPane.showMessageDialog(null, "Login Success");
-                    tellerdash udash = new tellerdash();
-                    udash.setVisible(true);
-                    this.dispose();
-                }
-                
-            }else{
-                JOptionPane.showMessageDialog(null, "Account not yet Activated");
-            }
-            
-        }else{
-            JOptionPane.showMessageDialog(null, "No Account found"); 
-        }
+        getLogin();
     }//GEN-LAST:event_loginActionPerformed
+
+    private void log_userKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_log_userKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            getLogin();
+        }
+    }//GEN-LAST:event_log_userKeyPressed
+
+    private void log_passKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_log_passKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            getLogin();
+        }
+    }//GEN-LAST:event_log_passKeyPressed
+
+    private void log_idKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_log_idKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            getLogin();
+        }
+    }//GEN-LAST:event_log_idKeyPressed
 
     /**
      * @param args the command line arguments

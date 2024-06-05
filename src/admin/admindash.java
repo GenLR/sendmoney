@@ -14,15 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import login.logindash;
 
-/**
- *
- * @author Larosa Family
- */
 public class admindash extends javax.swing.JFrame {
-
-    /**
-     * Creates new form admindash
-     */
+    
     public admindash() {
         initComponents();
         updateTimeAndDate();

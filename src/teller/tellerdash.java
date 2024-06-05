@@ -64,6 +64,8 @@ public class tellerdash extends javax.swing.JFrame {
         time = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         tellerpages = new javax.swing.JDesktopPane();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
 
         confirmOut.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         confirmOut.setText("Confirm Logout");
@@ -257,15 +259,36 @@ public class tellerdash extends javax.swing.JFrame {
 
         tellerpages.setPreferredSize(new java.awt.Dimension(800, 459));
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money-remittance (1).png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(192, 192, 192)
+                .addComponent(jLabel3)
+                .addContainerGap(208, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jLabel3)
+                .addContainerGap(143, Short.MAX_VALUE))
+        );
+
+        tellerpages.setLayer(jPanel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout tellerpagesLayout = new javax.swing.GroupLayout(tellerpages);
         tellerpages.setLayout(tellerpagesLayout);
         tellerpagesLayout.setHorizontalGroup(
             tellerpagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         tellerpagesLayout.setVerticalGroup(
             tellerpagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel1.add(tellerpages);
@@ -397,11 +420,13 @@ public class tellerdash extends javax.swing.JFrame {
     private javax.swing.JLabel date;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPopupMenu jPopupMenu1;
