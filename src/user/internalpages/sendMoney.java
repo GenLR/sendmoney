@@ -1,9 +1,13 @@
 
 package user.internalpages;
 
+import config.Session;
 import config.dbConnector;
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -19,23 +23,52 @@ public class sendMoney extends javax.swing.JInternalFrame {
         bi.setNorthPane(null);
     }
 
-    public boolean checkCustomer(String nm){
+    public static int checkContact(String coNum){
+        int conID;
+        dbConnector dbc = new dbConnector();
+        try{
+            
+            String query = "SELECT * FROM tbl_contact WHERE co_number = '"+coNum+"' ";
+            ResultSet rs = dbc.getData(query);
+            
+            if(rs.next()){
+                conID = rs.getInt("co_id");
+                rs.close();
+            }else{
+                dbc.insertData("INSERT INTO tbl_contact (co_number) VALUES ('"+coNum+"') ");
+                conID = checkContact(coNum);
+                rs.close();    
+            }
+            
+        }catch(SQLException ex){
+            System.out.println("Errors: "+ex.getMessage());
+            return 0;
+        }
+        return conID;
+    }
+    
+    public int checkCustomer(String lastName, String firstName){
+        dbConnector dbc = new dbConnector();
+        int cu_ID;
         
         try{
-            dbConnector dbc = new dbConnector();
-            ResultSet rs = dbc.getData("SELECT * FROM tbl_customer WHERE cu_name = '"+nm+"'");
+            
+            ResultSet rs = dbc.getData("SELECT * FROM tbl_customer WHERE cu_lname = '"+lastName+"' AND cu_fname = '"+firstName+"' ");
+                
                 if(rs.next()){
+                    cu_ID = rs.getInt("cu_id");
                     rs.close();
-                    return true;
-                }else{
+                    return cu_ID;
+                }else{  
                     rs.close();
-                    return false;
+                    return 0;
                 }
+                
             }catch(SQLException ex){
                 System.out.println("Errors: "+ex.getMessage());
-                return false;
+                return 0;
             } 
-        
+       
     }
     
     public static String getCode() {
@@ -64,18 +97,15 @@ public class sendMoney extends javax.swing.JInternalFrame {
     public static int getRate(int fee){
         int totalfee, initialfee;
         
-            if(fee >= 1 && fee <= 1000){
                 initialfee = fee / 100;
                     if((fee % 100) != 0){
                         initialfee += 1;
                     }
-                totalfee = initialfee * 3;
-            }else{
-                totalfee = 500;
-            }
+                totalfee = initialfee * 2;           
 
         return totalfee;
     }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -83,8 +113,6 @@ public class sendMoney extends javax.swing.JInternalFrame {
 
         genBackground1 = new config.genBackground();
         jPanel1 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -102,7 +130,7 @@ public class sendMoney extends javax.swing.JInternalFrame {
         re_cus = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         send_lname = new javax.swing.JTextField();
         send_fname = new javax.swing.JTextField();
@@ -119,48 +147,24 @@ public class sendMoney extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        retoreceiver = new javax.swing.JTextField();
+        relations = new javax.swing.JTextField();
         purpose = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         amount = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        charge = new javax.swing.JTextField();
+        fee = new javax.swing.JTextField();
+        total = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1000, 459));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
-
-        jPanel5.setBackground(new java.awt.Color(20, 120, 240));
-        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel5MouseClicked(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 204, 51));
-        jLabel3.setText("Generate Reciept");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(jPanel5);
-        jPanel5.setBounds(710, 370, 130, 31);
 
         jPanel6.setOpaque(false);
 
@@ -177,7 +181,7 @@ public class sendMoney extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,40 +236,37 @@ public class sendMoney extends javax.swing.JInternalFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(receive_lname, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(receive_fname, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
-                        .addComponent(receive_mname, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(receive_contact, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(re_cus, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(receive_lname))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(receive_fname))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(receive_mname))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(receive_contact))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(re_cus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(location, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -273,44 +274,44 @@ public class sendMoney extends javax.swing.JInternalFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(receive_lname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(receive_fname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(receive_mname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(receive_contact, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(location, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(re_cus, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel6);
-        jPanel6.setBounds(290, 0, 280, 240);
+        jPanel6.setBounds(350, 10, 310, 300);
 
         jPanel7.setOpaque(false);
 
         jPanel2.setBackground(new java.awt.Color(40, 120, 240));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Sender Info");
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Sender Info");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -318,14 +319,15 @@ public class sendMoney extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addComponent(jLabel24)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
         );
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -346,6 +348,12 @@ public class sendMoney extends javax.swing.JInternalFrame {
             }
         });
 
+        send_contact.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                send_contactFocusLost(evt);
+            }
+        });
+
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(19, 53, 112));
         jLabel13.setText("Contact No.");
@@ -362,72 +370,67 @@ public class sendMoney extends javax.swing.JInternalFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
-                        .addComponent(send_lname, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(send_fname, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(send_mname, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(send_contact, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(send_card, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(se_cus, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(send_lname, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(send_fname))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(send_mname))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(send_contact))
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(se_cus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(send_card)))))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(send_lname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(send_fname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(send_mname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(send_contact, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(send_card, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(se_cus, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel7);
-        jPanel7.setBounds(10, 0, 280, 240);
+        jPanel7.setBounds(20, 10, 310, 310);
 
         jPanel8.setOpaque(false);
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -445,7 +448,7 @@ public class sendMoney extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel10)
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -454,50 +457,71 @@ public class sendMoney extends javax.swing.JInternalFrame {
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel8.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+        jPanel8.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 290, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(19, 53, 112));
         jLabel15.setText("Relationship");
-        jPanel8.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 37, 80, 20));
+        jPanel8.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 80, 20));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(19, 53, 112));
         jLabel11.setText("to Receiver");
-        jPanel8.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 70, 10));
-        jPanel8.add(retoreceiver, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 37, 140, 30));
-        jPanel8.add(purpose, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 72, 140, 30));
+        jPanel8.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 70, 20));
+        jPanel8.add(relations, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 180, 30));
+        jPanel8.add(purpose, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 180, 30));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(19, 53, 112));
         jLabel17.setText("Purpose of");
-        jPanel8.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 72, 80, 20));
+        jPanel8.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 80, 20));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(19, 53, 112));
         jLabel18.setText("Transaction");
-        jPanel8.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 80, 20));
+        jPanel8.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 80, 20));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(19, 53, 112));
         jLabel19.setText("Amount");
-        jPanel8.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 108, 80, 20));
+        jPanel8.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 80, 20));
 
         amount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 amountKeyReleased(evt);
             }
         });
-        jPanel8.add(amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 108, 140, 30));
+        jPanel8.add(amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 180, 30));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(19, 53, 112));
         jLabel20.setText("Fee");
-        jPanel8.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 145, 80, 20));
-        jPanel8.add(charge, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 145, 90, 30));
+        jPanel8.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 80, 20));
+        jPanel8.add(fee, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 180, 30));
+        jPanel8.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 180, 30));
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(19, 53, 112));
+        jLabel25.setText("Total");
+        jPanel8.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 80, 20));
 
         jPanel1.add(jPanel8);
-        jPanel8.setBounds(10, 240, 270, 190);
+        jPanel8.setBounds(670, 10, 310, 240);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Sender Info");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(-210, -10, 73, 20);
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(370, 330, 120, 40);
 
         javax.swing.GroupLayout genBackground1Layout = new javax.swing.GroupLayout(genBackground1);
         genBackground1.setLayout(genBackground1Layout);
@@ -524,60 +548,16 @@ public class sendMoney extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-  /*      
-        dbConnector dbc = new dbConnector();
-        
-        if(!send_name.getText().equalsIgnoreCase(receive_name.getText())){
-            System.out.println("Name Found");
-            
-            if(dbc.insertData("INSERT INTO tbl_sender (se_name, se_contact, se_card) "
-                    + "SELECT cu_id, '"+send_contact.getText()+"', '"+send_card.getText()+"' "
-                    + "FROM tbl_customer "
-                    + "WHERE cu_name = '"+send_name.getText()+"' ")){
-                
-            }
-                    
-            if(dbc.insertData("INSERT INTO tbl_receiver (re_name, re_contact, re_card) "
-                    + "SELECT cu_id, '"+receive_contact.getText()+"', '0' "
-                    + "FROM tbl_customer "
-                    + "WHERE cu_name = '"+receive_name.getText()+"' ")){
-                
-            }
-        
-        
-            dbc.insertData("INSERT INTO tbl_transactions (tr_sender, tr_receiver, tr_location, tr_amount, tr_charge, tr_code, re_datesent, re_datereceived) " +
-                "SELECT se_id, re_id, '"+location.getText()+"', '"+amount.getText()+"', '"+charge.getText()+"', '"+code.getText()+"', '2002-08-22', '2002-08-06' "
-                        + "FROM tbl_sender s "
-                        + "INNER JOIN tbl_receiver r ON tbl_receiver.re_id = tbl_transantion.tr_id"
-                        + "WHERE cu_name = '"+send_name.getText()+"' AND cu_name = '"+receive_name.getText()+"' ");
-        
-        
-            dbc.insertData("INSERT INTO tbl_transactions t (tr_sender, tr_receiver, tr_location, tr_amount, tr_charge, tr_code, re_datesent, re_datereceived)" +
-                    "VALUES ( "
-                    + "(SELECT se_id FROM tbl_sender s INNER JOIN tbl_customer c ON s.se_id = c.cu_id "
-                    + " WHERE c.cu_name = '"+send_name.getText()+"' AND s.se_contact = '"+send_contact.getText()+"' ), "
-                    + "(SELECT re_id FROM tbl_receiver r INNER JOIN tbl_customer c ON r.re_id = c.cu_id "
-                    + " WHERE c.cu_name = '"+receive_name.getText()+"' AND r.re_contact = '"+receive_contact.getText()+"' ), "
-                    + " '"+location.getText()+"', '"+amount.getText()+"', '"+charge.getText()+"', '"+code.getText()+"', '2002-08-22', '2002-08-06' "
-                    + " ) " );
-
-        
-            JOptionPane.showMessageDialog(null, "Insert Successfully");
-        }else if(!checkCustomer(send_name.getText()) && !checkCustomer(receive_name.getText())){
-            System.out.println("No Found Name!");
-        }else{
-            JOptionPane.showMessageDialog(null, "Connection Error");
-        }
- */       
-    }//GEN-LAST:event_jPanel5MouseClicked
-
     private void send_mnameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_send_mnameFocusLost
-        if(!checkCustomer(send_mname.getText())){
-            se_cus.setText("New Customer");
-        }else{
-            se_cus.setText("");
-        }
+            
+        if(!send_lname.getText().isEmpty() && !send_fname.getText().isEmpty())
+            if(checkCustomer(send_lname.getText(), send_fname.getText()) == 0){
+                se_cus.setForeground(Color.red);
+                se_cus.setText("New Customer");
+            }else{
+                se_cus.setForeground(new Color(0,153,51));
+                se_cus.setText("Old Customer");
+            }
     }//GEN-LAST:event_send_mnameFocusLost
 
     private void re_cusFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_re_cusFocusLost
@@ -590,25 +570,103 @@ public class sendMoney extends javax.swing.JInternalFrame {
             try {
                 int intAmount = Integer.parseInt(amount.getText());
                 String strCharge = Integer.toString(getRate(intAmount));
-                charge.setText(strCharge);
+                fee.setText(strCharge);
+                
+                String strTotal = Integer.toString(intAmount + getRate(intAmount));
+                total.setText(strTotal);
+                
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, ""+amount.getText()+" should be numerical" );
             }
         }else{
-            charge.setText("");
+            fee.setText("");
         }
         
     }//GEN-LAST:event_amountKeyReleased
 
     private void receive_mnameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_receive_mnameFocusLost
-        // TODO add your handling code here:
+        
+        if(!receive_lname.getText().isEmpty() && !receive_fname.getText().isEmpty()){
+            if(checkCustomer(receive_lname.getText(), receive_fname.getText()) == 0){
+                re_cus.setForeground(Color.red);
+                re_cus.setText("New Customer");
+            }else{
+                re_cus.setForeground(new Color(0,153,51));
+                re_cus.setText("Old Customer");
+            }
+        }
+            
     }//GEN-LAST:event_receive_mnameFocusLost
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+           
+        dbConnector dbc = new dbConnector();
+        Session ses = Session.getInstance();
+        int senderID = checkCustomer(send_lname.getText(), send_lname.getText());
+        int receiverID = checkCustomer(receive_lname.getText(), receive_lname.getText());
+        String code = getCode();
+        
+        Date now = new Date();
+        SimpleDateFormat nowformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattednow = nowformat.format(now);
+        
+        
+        if(checkCustomer(receive_lname.getText(), receive_fname.getText()) == 0){
+            if(!receive_lname.getText().isEmpty() && !receive_fname.getText().isEmpty()){
+                dbc.insertData("INSERT INTO tbl_customer "
+                    + "(cu_lname, cu_fname, cu_mname, cu_contact, "
+                    + "cu_gender, cu_nationality, cu_address, cu_birthdate, "
+                    + "cu_birthplace, cu_marital, cu_occupation)"
+                    + " VALUES('"+receive_lname.getText()+"', '"+receive_fname.getText()+"', "
+                    + " 'temp', '"+checkContact(receive_contact.getText())+"', 'temp', 'temp', 'temp', '1111-11-11', 'temp', 'temp', 'temp' ) ");
+
+                    JOptionPane.showMessageDialog(null, "Temporary Receiver Inserted");
+            }else{
+                JOptionPane.showMessageDialog(null, "Connection Error");
+            }
+        }
+        
+        String loyalty;
+            if(!send_card.getText().isEmpty()){
+                loyalty = send_card.getText();
+            }else{
+                loyalty = "none";
+            }
+        
+        if(!send_lname.getText().equalsIgnoreCase(receive_lname.getText()) && !send_fname.getText().equalsIgnoreCase(receive_fname.getText())){
+            System.out.println("Name Found");
+            int secoID = checkContact(send_contact.getText());
+            int recoID = checkContact(receive_contact.getText());
+            
+            dbc.insertData("INSERT INTO tbl_transactions  "
+                    + "(tr_customer, tr_customerno, tr_customercard, "
+                    + " tr_factorname, tr_factorno, "
+                    + " tr_location, tr_relation, tr_purpose, "
+                    + " tr_amount, tr_fee, tr_total, "
+                    + " tr_code, tr_when, tr_type, tr_teller)" 
+                    + " VALUES ( '"+senderID+"', '"+secoID+"', '"+loyalty+"', "
+                    + " '"+receiverID+"', '"+recoID+"', "
+                    + " '"+location.getText()+"', '"+relations.getText()+"', '"+purpose.getText()+"', "
+                    + " '"+amount.getText()+"', '"+fee.getText()+"', '"+total.getText()+"', "
+                    + " '"+code+"', '"+formattednow+"', 'Send',  '"+ses.getEid()+"' ) ");
+        
+            JOptionPane.showMessageDialog(null, "Transaction Success");
+        }else if(send_lname.getText().equalsIgnoreCase(receive_lname.getText()) && send_fname.getText().equalsIgnoreCase(receive_fname.getText())){
+            JOptionPane.showMessageDialog(null, "Sender and Receiver is the same Person");
+        }
+     
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void send_contactFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_send_contactFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_send_contactFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField amount;
-    private javax.swing.JTextField charge;
+    private javax.swing.JTextField fee;
     private config.genBackground genBackground1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -623,7 +681,8 @@ public class sendMoney extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -634,7 +693,6 @@ public class sendMoney extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -645,12 +703,13 @@ public class sendMoney extends javax.swing.JInternalFrame {
     private javax.swing.JTextField receive_fname;
     private javax.swing.JTextField receive_lname;
     private javax.swing.JTextField receive_mname;
-    private javax.swing.JTextField retoreceiver;
+    private javax.swing.JTextField relations;
     private javax.swing.JLabel se_cus;
     private javax.swing.JTextField send_card;
     private javax.swing.JTextField send_contact;
     private javax.swing.JTextField send_fname;
     private javax.swing.JTextField send_lname;
     private javax.swing.JTextField send_mname;
+    private javax.swing.JTextField total;
     // End of variables declaration//GEN-END:variables
 }

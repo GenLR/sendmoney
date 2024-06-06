@@ -107,7 +107,6 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         customer_table = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
-        cu_id = new javax.swing.JTextField();
         cu_lname = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
@@ -135,6 +134,7 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         clear = new javax.swing.JButton();
         refresh = new javax.swing.JButton();
         add = new javax.swing.JButton();
+        cu_id = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         search = new javax.swing.JTextField();
 
@@ -158,10 +158,6 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setOpaque(false);
         jPanel9.setLayout(null);
-
-        cu_id.setBorder(javax.swing.BorderFactory.createTitledBorder("Customer ID"));
-        jPanel9.add(cu_id);
-        cu_id.setBounds(130, 0, 260, 30);
         jPanel9.add(cu_lname);
         cu_lname.setBounds(130, 30, 260, 30);
 
@@ -307,6 +303,8 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         });
         jPanel9.add(add);
         add.setBounds(890, 20, 90, 30);
+        jPanel9.add(cu_id);
+        cu_id.setBounds(130, 0, 260, 30);
 
         jPanel1.add(jPanel9);
         jPanel9.setBounds(0, 200, 990, 190);
