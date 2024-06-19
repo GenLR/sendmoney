@@ -303,6 +303,8 @@ public class viewCustomer extends javax.swing.JInternalFrame {
         });
         jPanel9.add(add);
         add.setBounds(890, 20, 90, 30);
+
+        cu_id.setEditable(false);
         jPanel9.add(cu_id);
         cu_id.setBounds(130, 0, 260, 30);
 

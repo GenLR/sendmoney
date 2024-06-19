@@ -4,7 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Larosa%20Family/Documents/NetBeansProjects/sendmoney/src/user/internalpages/sendMoney.java</file>
+            <file>file:/C:/Users/Larosa%20Family/Documents/NetBeansProjects/sendmoney/src/config/dbConnector.java</file>
             <file>file:/C:/Users/Larosa%20Family/Documents/NetBeansProjects/sendmoney/src/login/logindash.java</file>
+            <file>file:/C:/Users/Larosa%20Family/Documents/NetBeansProjects/sendmoney/src/user/internalpages/viewCustomer.java</file>
+            <file>file:/C:/Users/Larosa%20Family/Documents/NetBeansProjects/sendmoney/src/user/internalpages/viewHistory.java</file>
+            <file>file:/C:/Users/Larosa%20Family/Documents/NetBeansProjects/sendmoney/src/popupFrames/senderreceipt.java</file>
             <file>file:/C:/Users/Larosa%20Family/Documents/NetBeansProjects/sendmoney/src/teller/tellerdash.java</file>
         </group>
     </open-files>

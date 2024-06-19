@@ -4,7 +4,6 @@ package login;
 import admin.admindash;
 import com.sun.glass.events.KeyEvent;
 import config.*;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.NoSuchAlgorithmException;
@@ -36,7 +35,7 @@ public class logindash extends javax.swing.JFrame {
                 
                 if(passHash.hashPassword(password).equals(hashedPass)){
                     Session ses =  Session.getInstance();
-                        ses.setEid("employeeid");
+                        ses.setEid(rs.getString("employeeid"));
                         ses.setName(rs.getString("fullname"));
                         ses.setUsername(rs.getString("username"));
                         ses.setPassword(rs.getString("password"));
