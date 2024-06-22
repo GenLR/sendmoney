@@ -42,11 +42,18 @@ public class viewHistory extends javax.swing.JInternalFrame {
             dbConnector dbc = new dbConnector();
             ResultSet rs = dbc.getData("SELECT "
                     + " tr_code AS Code, "
-                    + " tr_type AS 'Transaction Type', "
-                    + " CONCAT(sender.cu_lname, ', ', sender.cu_fname, ' ', LEFT(sender.cu_mname, 1), '.') AS Customer, "
+                    + " tr_type AS Type, "
+                    + " CASE"
+                    + "     WHEN sender.cu_mname IS NOT NULL "
+                    + "     THEN CONCAT(sender.cu_lname, ', ', sender.cu_fname, ' ', LEFT(sender.cu_mname, 1), '.') "
+                    + "     ELSE CONCAT(sender.cu_lname, ', ', sender.cu_fname) "
+                    + " END AS Customer," 
                     + " send.co_number AS Contact, "
-                    + " tr_customercard AS 'Loyalty Card', "
-                    + " CONCAT(receiver.cu_lname, ', ', receiver.cu_fname, ' ', LEFT(receiver.cu_mname, 1), '.') AS Benefactor, "
+                    + " CASE"
+                    + "     WHEN receiver.cu_mname IS NOT NULL "
+                    + "     THEN CONCAT(receiver.cu_lname, ', ', receiver.cu_fname, ' ', LEFT(receiver.cu_mname, 1), '.') "
+                    + "     ELSE CONCAT(receiver.cu_lname, ', ', receiver.cu_fname) "
+                    + " END AS Counterparty, "
                     + " receive.co_number AS Contact, "
                     + " tr_location AS Destination, "
                 //    + " tr_relation AS Relationship, "
@@ -58,9 +65,9 @@ public class viewHistory extends javax.swing.JInternalFrame {
                 //    + " tell.fullname AS 'Teller Incharge' " 
                     + " FROM tbl_transactions t " 
                     + " INNER JOIN tbl_customer sender ON t.tr_customer = sender.cu_id " 
-                    + " INNER JOIN tbl_customer receiver ON t.tr_factorname = receiver.cu_id " 
+                    + " INNER JOIN tbl_customer receiver ON t.tr_counterparty = receiver.cu_id " 
                     + " INNER JOIN tbl_contact send ON t.tr_customerno = send.co_id " 
-                    + " INNER JOIN tbl_contact receive ON t.tr_factorno = receive.co_id "
+                    + " INNER JOIN tbl_contact receive ON t.tr_counterpartyno = receive.co_id "
                     + " INNER JOIN tbl_user tell ON t.tr_teller = tell.employeeid"
                     + " WHERE tell.fullname = '"+ses.getName()+"' ");
             transaction_table.setModel(DbUtils.resultSetToTableModel(rs));
@@ -99,8 +106,6 @@ public class viewHistory extends javax.swing.JInternalFrame {
         send_mname = new javax.swing.JTextField();
         send_contact = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        send_card = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -175,11 +180,11 @@ public class viewHistory extends javax.swing.JInternalFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(10, 40, 980, 150);
+        jPanel2.setBounds(10, 40, 980, 170);
 
         jPanel7.setOpaque(false);
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -188,7 +193,7 @@ public class viewHistory extends javax.swing.JInternalFrame {
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setText("Sender Info");
+        jLabel24.setText("Customer Info");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -197,7 +202,7 @@ public class viewHistory extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel24)
-                .addContainerGap(217, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,16 +246,8 @@ public class viewHistory extends javax.swing.JInternalFrame {
         jLabel13.setText("Contact No.");
         jPanel7.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 135, 80, 20));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(19, 53, 112));
-        jLabel6.setText("Loyalty Card");
-        jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 80, 20));
-
-        send_card.setEditable(false);
-        jPanel7.add(send_card, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 180, 30));
-
         jPanel1.add(jPanel7);
-        jPanel7.setBounds(10, 210, 310, 210);
+        jPanel7.setBounds(20, 210, 310, 180);
 
         jPanel6.setOpaque(false);
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -259,7 +256,7 @@ public class viewHistory extends javax.swing.JInternalFrame {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Receiver Info");
+        jLabel7.setText("Counterparty Info");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -268,7 +265,7 @@ public class viewHistory extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,7 +323,7 @@ public class viewHistory extends javax.swing.JInternalFrame {
         jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 70, 20));
 
         jPanel1.add(jPanel6);
-        jPanel6.setBounds(340, 210, 310, 210);
+        jPanel6.setBounds(350, 210, 310, 210);
 
         jPanel8.setOpaque(false);
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -406,7 +403,7 @@ public class viewHistory extends javax.swing.JInternalFrame {
         jPanel8.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 80, 20));
 
         jPanel1.add(jPanel8);
-        jPanel8.setBounds(670, 210, 320, 220);
+        jPanel8.setBounds(680, 210, 320, 220);
 
         javax.swing.GroupLayout genBackground1Layout = new javax.swing.GroupLayout(genBackground1);
         genBackground1.setLayout(genBackground1Layout);
@@ -461,9 +458,9 @@ public class viewHistory extends javax.swing.JInternalFrame {
                     + " receive.co_number "
                     + " FROM tbl_transactions t " 
                     + " INNER JOIN tbl_customer sender ON t.tr_customer = sender.cu_id " 
-                    + " INNER JOIN tbl_customer receiver ON t.tr_factorname = receiver.cu_id " 
+                    + " INNER JOIN tbl_customer receiver ON t.tr_counterparty = receiver.cu_id " 
                     + " INNER JOIN tbl_contact send ON t.tr_customerno = send.co_id " 
-                    + " INNER JOIN tbl_contact receive ON t.tr_factorno = receive.co_id " 
+                    + " INNER JOIN tbl_contact receive ON t.tr_counterpartyno = receive.co_id " 
                     + " INNER JOIN tbl_user tell ON t.tr_teller = tell.employeeid"
                     + " WHERE tr_code = '"+tCode+"' "
                     + " AND CONCAT(sender.cu_lname, ', ', sender.cu_fname, ' ', LEFT(sender.cu_mname, 1), '.') = '"+tCustomer+"' "
@@ -475,7 +472,6 @@ public class viewHistory extends javax.swing.JInternalFrame {
                         send_fname.setText(rs.getString("sender.cu_fname"));
                         send_mname.setText(rs.getString("sender.cu_mname"));
                         send_contact.setText(rs.getString("send.co_number"));
-                        send_card.setText(rs.getString("tr_customercard"));
 
                         receive_lname.setText(rs.getString("receiver.cu_lname"));
                         receive_fname.setText(rs.getString("receiver.cu_fname"));
@@ -525,7 +521,6 @@ public class viewHistory extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -546,7 +541,6 @@ public class viewHistory extends javax.swing.JInternalFrame {
     private javax.swing.JTextField receive_mname;
     private javax.swing.JTextField relations;
     private javax.swing.JTextField search;
-    private javax.swing.JTextField send_card;
     private javax.swing.JTextField send_contact;
     private javax.swing.JTextField send_fname;
     private javax.swing.JTextField send_lname;

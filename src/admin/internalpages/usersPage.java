@@ -124,17 +124,17 @@ public class usersPage extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
         password = new javax.swing.JTextField();
-        add = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         acctype = new javax.swing.JComboBox<>();
         status = new javax.swing.JComboBox<>();
         search = new javax.swing.JTextField();
+        add = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1000, 420));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -232,6 +232,18 @@ public class usersPage extends javax.swing.JInternalFrame {
         jPanel7.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 11, 260, 30));
         jPanel7.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 41, 260, 30));
 
+        acctype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "teller" }));
+        acctype.setSelectedIndex(1);
+        jPanel7.add(acctype, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 260, 30));
+
+        status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "active", "onhold", "terminated" }));
+        jPanel7.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 260, 30));
+
+        jPanel1.add(jPanel7);
+        jPanel7.setBounds(30, 270, 800, 130);
+        jPanel1.add(search);
+        search.setBounds(830, 10, 160, 30);
+
         add.setBackground(new java.awt.Color(20, 120, 240));
         add.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -257,29 +269,8 @@ public class usersPage extends javax.swing.JInternalFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
-        jPanel7.add(add, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, -1, -1));
-
-        jPanel5.setBackground(new java.awt.Color(20, 120, 240));
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("DELETE");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel13)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-        );
-
-        jPanel7.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 110, -1, -1));
+        jPanel1.add(add);
+        add.setBounds(880, 270, 80, 31);
 
         jPanel3.setBackground(new java.awt.Color(20, 120, 240));
         jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -306,7 +297,31 @@ public class usersPage extends javax.swing.JInternalFrame {
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
-        jPanel7.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, -1, -1));
+        jPanel1.add(jPanel3);
+        jPanel3.setBounds(880, 305, 80, 31);
+
+        jPanel5.setBackground(new java.awt.Color(20, 120, 240));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("DELETE");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel13)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel5);
+        jPanel5.setBounds(880, 340, 80, 31);
 
         jPanel4.setBackground(new java.awt.Color(20, 120, 240));
 
@@ -328,29 +343,18 @@ public class usersPage extends javax.swing.JInternalFrame {
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
-        jPanel7.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 110, -1, -1));
-
-        acctype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "teller" }));
-        acctype.setSelectedIndex(1);
-        jPanel7.add(acctype, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 260, 30));
-
-        status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "active", "onhold", "terminated" }));
-        jPanel7.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 260, 30));
-
-        jPanel1.add(jPanel7);
-        jPanel7.setBounds(0, 270, 800, 150);
-        jPanel1.add(search);
-        search.setBounds(830, 10, 160, 30);
+        jPanel1.add(jPanel4);
+        jPanel4.setBounds(880, 375, 80, 31);
 
         javax.swing.GroupLayout genBackground1Layout = new javax.swing.GroupLayout(genBackground1);
         genBackground1.setLayout(genBackground1Layout);
         genBackground1Layout.setHorizontalGroup(
             genBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 995, Short.MAX_VALUE)
         );
         genBackground1Layout.setVerticalGroup(
             genBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

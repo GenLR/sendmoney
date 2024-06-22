@@ -50,8 +50,8 @@ public class admindash extends javax.swing.JFrame {
         transactions = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         adminpages = new javax.swing.JDesktopPane();
         genBackground1 = new config.genBackground();
         jLabel4 = new javax.swing.JLabel();
@@ -108,7 +108,7 @@ public class admindash extends javax.swing.JFrame {
         jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
 
         jPanel2.add(jPanel7);
-        jPanel7.setBounds(830, 50, 170, 30);
+        jPanel7.setBounds(830, 30, 170, 30);
 
         jPanel4.setOpaque(false);
 
@@ -195,21 +195,21 @@ public class admindash extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel4);
-        jPanel4.setBounds(160, 50, 300, 30);
+        jPanel4.setBounds(160, 30, 300, 30);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo ('80).png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo ('50).png"))); // NOI18N
+        jPanel2.add(jLabel7);
+        jLabel7.setBounds(10, 0, 90, 60);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 7)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("where money flies");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(0, 0, 142, 80);
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("where money flies");
-        jPanel2.add(jLabel6);
-        jLabel6.setBounds(50, 60, 100, 20);
+        jLabel5.setBounds(30, 40, 100, 20);
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 1010, 80);
+        jPanel2.setBounds(0, 0, 1010, 60);
 
         adminpages.setBackground(new java.awt.Color(204, 204, 204));
         adminpages.setPreferredSize(new java.awt.Dimension(800, 459));
@@ -261,11 +261,11 @@ public class admindash extends javax.swing.JFrame {
         );
         adminpagesLayout.setVerticalGroup(
             adminpagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(genBackground1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(genBackground1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel1.add(adminpages);
-        adminpages.setBounds(0, 80, 1000, 420);
+        adminpages.setBounds(0, 60, 1000, 440);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -358,7 +358,7 @@ public class admindash extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
